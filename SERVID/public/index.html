@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Banco de Dados Projeto</title>
+  <style>
+    body { font-family: Arial; max-width: 450px; margin: 40px auto; }
+    .form-grupo { margin-bottom: 15px; }
+    .form-grupo input { display: block; width: 100%; margin-bottom: 8px; padding: 8px; box-sizing: border-box; }
+    button { padding: 8px 15px; cursor: pointer; }
+    li { padding: 10px; border-bottom: 1px solid #ddd; display: flex; justify-content: space-between; align-items: center; }
+    .dados { display: flex; flex-direction: column; }
+  </style>
+</head>
+<body>
+
+  <h1>Cadastro de Clientes</h1>
+
+  <!-- Campos para criar cliente -->
+  <div class="form-grupo">
+    <input id="campoNome" placeholder="Nome do cliente...">
+    <input id="campoEmail" placeholder="E-mail do cliente...">
+    <input id="campoTelefone" placeholder="Telefone do cliente...">
+  </div>
+  <button onclick="criarCliente()">Adicionar Cliente</button>
+
+  <h2>Lista de Clientes</h2>
+  <ul id="listaClientes"></ul>
+
+  <script>
+    const url = '/api/clientes'; // endereço da API no seu novo servidor
+
+    const campoNome = document.getElementById('campoNome');
+    const campoEmail = document.getElementById('campoEmail');
+    const campoTelefone = document.getElementById('campoTelefone');
+    const listaClientes = document.getElementById('listaClientes');
+
+    // ========== CREATE (criar) ==========
+    async function criarCliente() {
+      await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          nome: campoNome.value,
+          email: campoEmail.value,
+          telefone: campoTelefone.value
+        })
+      });
+
+      // Limpa os campos após salvar
+      campoNome.value = '';
+      campoEmail.value = '';
+      campoTelefone.value = '';
+      
+      listarClientes(); // atualiza a lista na tela
+    }
+
+    // ========== READ (ler) ==========
+    async function listarClientes() {
+      const resposta = await fetch(url);
+      const clientes = await resposta.json();
+
+      listaClientes.innerHTML = ''; // limpa a lista antes de desenhar
+
+      clientes.forEach((cliente) => {
+        const item = document.createElement('li');
+
+        // Cria o bloco com as informações do cliente
+        const divDados = document.createElement('div');
+        divDados.className = 'dados';
+        divDados.innerHTML = `<strong>${cliente.nome}</strong><small>${cliente.email} | ${cliente.telefone}</small>`;
+
+        // Botão para apagar
+        const botaoApagar = document.createElement('button');
+        botaoApagar.textContent = 'Apagar';
+        botaoApagar.onclick = () => apagarCliente(cliente.id);
+
+        item.append(divDados, botaoApagar);
+        listaClientes.appendChild(item);
+      });
+    }
+
+    // ========== DELETE (apagar) ==========
+    async function apagarCliente(id) {
+      await fetch(url + '/' + id, { method: 'DELETE' });
+      listarClientes(); // atualiza a lista na tela
+    }
+
+    // Quando a página abre, já mostra os clientes cadastrados
+    listarClientes();
+  </script>
+</body>
+</html>
