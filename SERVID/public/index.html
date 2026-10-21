@@ -2,92 +2,267 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Banco de Dados Projeto</title>
+  <title>Sistema de Gestão de Serviços</title>
   <style>
-    body { font-family: Arial; max-width: 450px; margin: 40px auto; }
-    .form-grupo { margin-bottom: 15px; }
-    .form-grupo input { display: block; width: 100%; margin-bottom: 8px; padding: 8px; box-sizing: border-box; }
-    button { padding: 8px 15px; cursor: pointer; }
-    li { padding: 10px; border-bottom: 1px solid #ddd; display: flex; justify-content: space-between; align-items: center; }
-    .dados { display: flex; flex-direction: column; }
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    nav button { padding: 10px 15px; margin-right: 5px; cursor: pointer; }
+    .aba { display: none; margin-top: 20px; }
+    .aba.ativa { display: block; }
+    form { margin-bottom: 20px; }
+    input, select, button { margin: 5px 0; padding: 8px; display: block; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background-color: #f2f2f2; }
   </style>
 </head>
 <body>
 
-  <h1>Cadastro de Clientes</h1>
+  <h1>Sistema de Gestão de Serviços</h1>
 
-  <!-- Campos para criar cliente -->
-  <div class="form-grupo">
-    <input id="campoNome" placeholder="Nome do cliente...">
-    <input id="campoEmail" placeholder="E-mail do cliente...">
-    <input id="campoTelefone" placeholder="Telefone do cliente...">
+  <nav>
+    <button onclick="mostrarAba('clientes')">Clientes</button>
+    <button onclick="mostrarAba('tecnicos')">Técnicos</button>
+    <button onclick="mostrarAba('equipamentos')">Equipamentos</button>
+    <button onclick="mostrarAba('ordens')">Ordens de Serviço</button>
+    <button onclick="mostrarAba('usuarios')">Usuários</button>
+  </nav>
+
+  <!-- CLIENTES -->
+  <div id="aba-clientes" class="aba ativa">
+    <h2>Clientes</h2>
+    <form id="form-cliente">
+      <input type="text" id="cli-nome" placeholder="Nome" required>
+      <input type="email" id="cli-email" placeholder="Email" required>
+      <input type="text" id="cli-telefone" placeholder="Telefone" required>
+      <button type="submit">Cadastrar Cliente</button>
+    </form>
+    <table>
+      <thead><tr><th>ID</th><th>Nome</th><th>Email</th><th>Telefone</th><th>Ação</th></tr></thead>
+      <tbody id="lista-clientes"></tbody>
+    </table>
   </div>
-  <button onclick="criarCliente()">Adicionar Cliente</button>
 
-  <h2>Lista de Clientes</h2>
-  <ul id="listaClientes"></ul>
+  <!-- TÉCNICOS -->
+  <div id="aba-tecnicos" class="aba">
+    <h2>Técnicos</h2>
+    <form id="form-tecnico">
+      <input type="text" id="tec-nome" placeholder="Nome" required>
+      <input type="text" id="tec-especialidade" placeholder="Especialidade" required>
+      <input type="email" id="tec-email" placeholder="Email" required>
+      <button type="submit">Cadastrar Técnico</button>
+    </form>
+    <table>
+      <thead><tr><th>ID</th><th>Nome</th><th>Especialidade</th><th>Email</th><th>Ação</th></tr></thead>
+      <tbody id="lista-tecnicos"></tbody>
+    </table>
+  </div>
+
+  <!-- EQUIPAMENTOS -->
+  <div id="aba-equipamentos" class="aba">
+    <h2>Equipamentos</h2>
+    <form id="form-equipamento">
+      <input type="text" id="eq-nome" placeholder="Nome/Tipo do Equipamento (Ex: Notebook)" required>
+      <input type="text" id="eq-modelo" placeholder="Modelo (Ex: Dell Vostro)" required>
+      <input type="number" id="eq-cliente-id" placeholder="ID do Cliente Existente" required>
+      <button type="submit">Cadastrar Equipamento</button>
+    </form>
+    <table>
+      <thead><tr><th>ID</th><th>Nome</th><th>Modelo</th><th>Cliente</th><th>Ação</th></tr></thead>
+      <tbody id="lista-equipamentos"></tbody>
+    </table>
+  </div>
+
+  <!-- ORDENS DE SERVIÇO -->
+  <div id="aba-ordens" class="aba">
+    <h2>Ordens de Serviço</h2>
+    <form id="form-os">
+      <input type="number" id="os-cliente-id" placeholder="ID do Cliente Existente" required>
+      <input type="number" id="os-tecnico-id" placeholder="ID do Técnico (Opcional)">
+      <input type="number" id="os-equipamento-id" placeholder="ID do Equipamento (Opcional)">
+      <input type="text" id="os-descricao" placeholder="Descrição do Problema" required>
+      <select id="os-status">
+        <option value="Pendente">Pendente</option>
+        <option value="Em Andamento">Em Andamento</option>
+        <option value="Concluido">Concluído</option>
+      </select>
+      <button type="submit">Criar Ordem de Serviço</button>
+    </form>
+    <table>
+      <thead><tr><th>ID</th><th>Cliente</th><th>Técnico</th><th>Equipamento</th><th>Descrição</th><th>Status</th><th>Ação</th></tr></thead>
+      <tbody id="lista-os"></tbody>
+    </table>
+  </div>
+
+  <!-- USUÁRIOS -->
+  <div id="aba-usuarios" class="aba">
+    <h2>Usuários</h2>
+    <form id="form-usuario">
+      <input type="text" id="usr-nome" placeholder="Nome" required>
+      <input type="email" id="usr-email" placeholder="Email" required>
+      <button type="submit">Cadastrar Usuário</button>
+    </form>
+    <table>
+      <thead><tr><th>ID</th><th>Nome</th><th>Email</th><th>Ação</th></tr></thead>
+      <tbody id="lista-usuarios"></tbody>
+    </table>
+  </div>
 
   <script>
-    const url = '/api/clientes'; // endereço da API no seu novo servidor
+    function mostrarAba(nomeAba) {
+      document.querySelectorAll('.aba').forEach(el => el.classList.remove('ativa'));
+      document.getElementById('aba-' + nomeAba).classList.add('ativa');
+      if(nomeAba === 'clientes') carregarClientes();
+      if(nomeAba === 'tecnicos') carregarTecnicos();
+      if(nomeAba === 'equipamentos') carregarEquipamentos();
+      if(nomeAba === 'ordens') carregarOS();
+      if(nomeAba === 'usuarios') carregarUsuarios();
+    }
 
-    const campoNome = document.getElementById('campoNome');
-    const campoEmail = document.getElementById('campoEmail');
-    const campoTelefone = document.getElementById('campoTelefone');
-    const listaClientes = document.getElementById('listaClientes');
+    async function enviarReq(url, metodo, dados) {
+      try {
+        const res = await fetch(url, {
+          method: metodo,
+          headers: { 'Content-Type': 'application/json' },
+          body: dados ? JSON.stringify(dados) : null
+        });
+        if (!res.ok) {
+          const err = await res.json();
+          alert('Erro no servidor: ' + (err.erro || 'Verifique os dados preenchidos.'));
+          return false;
+        }
+        return true;
+      } catch (e) {
+        alert('Erro ao se comunicar com o servidor!');
+        return false;
+      }
+    }
 
-    // ========== CREATE (criar) ==========
-    async function criarCliente() {
-      await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          nome: campoNome.value,
-          email: campoEmail.value,
-          telefone: campoTelefone.value
-        })
+    // --- CLIENTES ---
+    async function carregarClientes() {
+      const res = await fetch('/api/clientes');
+      const dados = await res.json();
+      document.getElementById('lista-clientes').innerHTML = dados.map(c => `
+        <tr>
+          <td>${c.id}</td><td>${c.nome}</td><td>${c.email}</td><td>${c.telefone}</td>
+          <td><button onclick="deletar('/api/clientes/${c.id}', carregarClientes)">Excluir</button></td>
+        </tr>
+      `).join('');
+    }
+
+    document.getElementById('form-cliente').onsubmit = async (e) => {
+      e.preventDefault();
+      const ok = await enviarReq('/api/clientes', 'POST', {
+        nome: document.getElementById('cli-nome').value,
+        email: document.getElementById('cli-email').value,
+        telefone: document.getElementById('cli-telefone').value
       });
+      if (ok) { e.target.reset(); carregarClientes(); }
+    };
 
-      // Limpa os campos após salvar
-      campoNome.value = '';
-      campoEmail.value = '';
-      campoTelefone.value = '';
-      
-      listarClientes(); // atualiza a lista na tela
+    // --- TÉCNICOS ---
+    async function carregarTecnicos() {
+      const res = await fetch('/api/tecnicos');
+      const dados = await res.json();
+      document.getElementById('lista-tecnicos').innerHTML = dados.map(t => `
+        <tr>
+          <td>${t.id}</td><td>${t.nome}</td><td>${t.especialidade}</td><td>${t.email}</td>
+          <td><button onclick="deletar('/api/tecnicos/${t.id}', carregarTecnicos)">Excluir</button></td>
+        </tr>
+      `).join('');
     }
 
-    // ========== READ (ler) ==========
-    async function listarClientes() {
-      const resposta = await fetch(url);
-      const clientes = await resposta.json();
-
-      listaClientes.innerHTML = ''; // limpa a lista antes de desenhar
-
-      clientes.forEach((cliente) => {
-        const item = document.createElement('li');
-
-        // Cria o bloco com as informações do cliente
-        const divDados = document.createElement('div');
-        divDados.className = 'dados';
-        divDados.innerHTML = `<strong>${cliente.nome}</strong><small>${cliente.email} | ${cliente.telefone}</small>`;
-
-        // Botão para apagar
-        const botaoApagar = document.createElement('button');
-        botaoApagar.textContent = 'Apagar';
-        botaoApagar.onclick = () => apagarCliente(cliente.id);
-
-        item.append(divDados, botaoApagar);
-        listaClientes.appendChild(item);
+    document.getElementById('form-tecnico').onsubmit = async (e) => {
+      e.preventDefault();
+      const ok = await enviarReq('/api/tecnicos', 'POST', {
+        nome: document.getElementById('tec-nome').value,
+        especialidade: document.getElementById('tec-especialidade').value,
+        email: document.getElementById('tec-email').value
       });
+      if (ok) { e.target.reset(); carregarTecnicos(); }
+    };
+
+    // --- EQUIPAMENTOS ---
+    async function carregarEquipamentos() {
+      const res = await fetch('/api/equipamentos');
+      const dados = await res.json();
+      document.getElementById('lista-equipamentos').innerHTML = dados.map(e => `
+        <tr>
+          <td>${e.id}</td><td>${e.nome}</td><td>${e.modelo}</td><td>${e.cliente_nome || e.cliente_id}</td>
+          <td><button onclick="deletar('/api/equipamentos/${e.id}', carregarEquipamentos)">Excluir</button></td>
+        </tr>
+      `).join('');
     }
 
-    // ========== DELETE (apagar) ==========
-    async function apagarCliente(id) {
-      await fetch(url + '/' + id, { method: 'DELETE' });
-      listarClientes(); // atualiza a lista na tela
+    document.getElementById('form-equipamento').onsubmit = async (e) => {
+      e.preventDefault();
+      const ok = await enviarReq('/api/equipamentos', 'POST', {
+        nome: document.getElementById('eq-nome').value,
+        modelo: document.getElementById('eq-modelo').value,
+        cliente_id: Number(document.getElementById('eq-cliente-id').value)
+      });
+      if (ok) { e.target.reset(); carregarEquipamentos(); }
+    };
+
+    // --- ORDENS DE SERVIÇO ---
+    async function carregarOS() {
+      const res = await fetch('/api/ordens_servico');
+      const dados = await res.json();
+      document.getElementById('lista-os').innerHTML = dados.map(os => `
+        <tr>
+          <td>${os.id}</td>
+          <td>${os.cliente_nome || os.cliente_id}</td>
+          <td>${os.tecnico_nome || '-'}</td>
+          <td>${os.equipamento_nome || '-'}</td>
+          <td>${os.descricao}</td>
+          <td>${os.status}</td>
+          <td><button onclick="deletar('/api/ordens_servico/${os.id}', carregarOS)">Excluir</button></td>
+        </tr>
+      `).join('');
     }
 
-    // Quando a página abre, já mostra os clientes cadastrados
-    listarClientes();
+    document.getElementById('form-os').onsubmit = async (e) => {
+      e.preventDefault();
+      const ok = await enviarReq('/api/ordens_servico', 'POST', {
+        cliente_id: Number(document.getElementById('os-cliente-id').value),
+        tecnico_id: document.getElementById('os-tecnico-id').value ? Number(document.getElementById('os-tecnico-id').value) : null,
+        equipamento_id: document.getElementById('os-equipamento-id').value ? Number(document.getElementById('os-equipamento-id').value) : null,
+        descricao: document.getElementById('os-descricao').value,
+        status: document.getElementById('os-status').value
+      });
+      if (ok) { e.target.reset(); carregarOS(); }
+    };
+
+    // --- USUÁRIOS ---
+    async function carregarUsuarios() {
+      const res = await fetch('/api/usuarios');
+      const dados = await res.json();
+      document.getElementById('lista-usuarios').innerHTML = dados.map(u => `
+        <tr>
+          <td>${u.id}</td><td>${u.nome}</td><td>${u.email}</td>
+          <td><button onclick="deletar('/api/usuarios/${u.id}', carregarUsuarios)">Excluir</button></td>
+        </tr>
+      `).join('');
+    }
+
+    document.getElementById('form-usuario').onsubmit = async (e) => {
+      e.preventDefault();
+      const ok = await enviarReq('/api/usuarios', 'POST', {
+        nome: document.getElementById('usr-nome').value,
+        email: document.getElementById('usr-email').value
+      });
+      if (ok) { e.target.reset(); carregarUsuarios(); }
+    };
+
+    // --- EXCLUSÃO ---
+    async function deletar(url, callback) {
+      if (confirm('Deseja realmente excluir este registro?')) {
+        await fetch(url, { method: 'DELETE' });
+        callback();
+      }
+    }
+
+    // Inicializa a primeira aba
+    carregarClientes();
   </script>
 </body>
 </html>
