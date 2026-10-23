@@ -387,6 +387,9 @@
       } catch(e) {}
     }
 
+
+    
+
     document.getElementById('form-os').onsubmit = async (e) => {
       e.preventDefault();
       const ok = await enviarReq('/api/ordens_servico', 'POST', {
