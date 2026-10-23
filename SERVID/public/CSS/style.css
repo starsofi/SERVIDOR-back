@@ -1,0 +1,360 @@
+/* CONFIGURAÇÃO GLOBAL E TIPOGRAFIA INTER */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+s
+agnes tira esse ngc da imagem pfr, ta doendo meu olhofia eu preciso q vc crie uma pasta imagens
+e aí vc vai colocar a imagem, e vc vai abaixar eu vou te mandar
+
+olhá lá 
+body {
+  background: #1c2436;
+  padding: 30px 15px;
+  display: flex;
+  justify-content: center;
+  color: #1c2436;
+  min-height: 100vh;
+}
+
+/* CARTÃO PRINCIPAL DO FORMULÁRIO */
+.pagina-formulario {
+  background-color: #ffffff;
+  width: 95%;
+  max-width: 1300px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* CABEÇALHO */
+.cabecalho-novo {
+  background: linear-gradient(135deg, #1e2d4e 0%, #273855 45%, #ff6b35 100%);
+  padding: 30px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #ffffff;
+  border-bottom: 4px solid #ff6b35;
+}
+
+.bloco-logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo-wrapper {
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  width: 65px;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: brightness(1.1) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
+}
+
+.logo-titulo {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.logo-subtitulo {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #ff9d76;
+  margin-top: 3px;
+}
+
+.bloco-titulo {
+  text-align: right;
+}
+
+.tag-os {
+  background: rgba(255, 107, 53, 0.25);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+  display: inline-block;
+  margin-bottom: 6px;
+}
+
+.titulo-destaque {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+}
+
+/* CORPO DO FORMULÁRIO */
+.corpo-formulario {
+  padding: 35px 40px;
+  background-color: #f8fafc;
+}
+
+/* MENU NAVEGAÇÃO DE ABAS */
+.menu-abas {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+  background: #ffffff;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.btn-aba {
+  flex: 1;
+  padding: 12px;
+  background: #f1f5f9;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-aba:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.btn-aba.ativa {
+  background: #ff6b35;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+/* CONTEÚDO DAS ABAS */
+.aba {
+  display: none;
+}
+
+.aba.ativa {
+  display: block;
+}
+
+.secao-container {
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.pilula-secao {
+  color: #0f172a;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  padding-bottom: 8px;
+  border-bottom: 2.5px solid #ff6b35;
+}
+
+/* CAMPOS E INPUTS */
+.linha-campo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: flex-end;
+}
+
+.flex-1 {
+  flex: 1;
+  min-width: 200px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+label {
+  color: #334155;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="date"],
+input[type="time"],
+select,
+textarea {
+  width: 100%;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 11px 14px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #0f172a;
+  outline: none;
+  background-color: #ffffff;
+  transition: all 0.2s ease-in-out;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #ff6b35;
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.15);
+}
+
+textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+/* TABELAS */
+.tabela-container {
+  overflow-x: auto;
+  margin-top: 15px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+}
+
+.tabela-clientes {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.tabela-clientes th,
+.tabela-clientes td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.tabela-clientes th {
+  background-color: #fff7f4;
+  color: #ff6b35;
+  font-weight: 700;
+}
+
+.tabela-clientes tr:hover {
+  background-color: #f8fafc;
+}
+
+/* BOTÕES */
+.btn-acao {
+  background-color: #ff6b35;
+  color: #ffffff;
+  border: none;
+  padding: 11px 22px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  white-space: nowrap;
+  height: 44px;
+  margin-bottom: 12px;
+  transition: all 0.2s ease;
+}
+
+.btn-acao:hover {
+  background-color: #e55a2b;
+  transform: translateY(-1px);
+}
+
+.btn-submeter {
+  background: linear-gradient(135deg, #ff6b35 0%, #e55a2b 100%);
+  color: #ffffff;
+  border: none;
+  padding: 14px 40px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.35);
+  transition: all 0.2s ease;
+}
+
+.btn-submeter:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.45);
+}
+
+.btn-deletar {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.btn-deletar:hover {
+  background: #dc2626;
+}
+
+.badge-status {
+  background-color: #e2e8f0;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+/* RODAPÉ */
+.rodape-faixa {
+  height: 8px;
+  background: linear-gradient(90deg, #0f172a 0%, #ff6b35 100%);
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+  .menu-abas {
+    flex-direction: column;
+  }
+  
+  .cabecalho-novo {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+
+  .bloco-titulo {
+    text-align: center;
+  }
+
+  .linha-campo {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .flex-1 {
+    width: 100%;
+  }
+
+  .btn-acao {
+    width: 100%;
+  }
+}

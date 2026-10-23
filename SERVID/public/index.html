@@ -2,115 +2,264 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Sistema de Gestão de Serviços</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    nav button { padding: 10px 15px; margin-right: 5px; cursor: pointer; }
-    .aba { display: none; margin-top: 20px; }
-    .aba.ativa { display: block; }
-    form { margin-bottom: 20px; }
-    input, select, button { margin: 5px 0; padding: 8px; display: block; }
-    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
-    th { background-color: #f2f2f2; }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Gestão de Serviços - A.S.A.I.</title>
+  
+  <!-- Fonte Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Estilos CSS -->
+  <link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
 
-  <h1>Sistema de Gestão de Serviços</h1>
+  <div class="pagina-formulario">
+    
+    <!-- Cabeçalho -->
+    <header class="cabecalho-novo">
+      <div class="bloco-logo">
+        <div class="logo-wrapper">
+          <img src="pecas.png" alt="Logótipo ASAI" class="logo-img" onerror="this.src='peças.png';">
+        </div>
+        <div class="texto-logo">
+          <h1 class="logo-titulo">A.S.A.I.</h1>
+          <p class="logo-subtitulo">MANUTENÇÕES</p>
+        </div>
+      </div>
+      <div class="bloco-titulo">
+        <span class="tag-os">SISTEMA DE GESTÃO</span>
+        <h2 class="titulo-destaque">Painel Operacional</h2>
+      </div>
+    </header>
 
-  <nav>
-    <button onclick="mostrarAba('clientes')">Clientes</button>
-    <button onclick="mostrarAba('tecnicos')">Técnicos</button>
-    <button onclick="mostrarAba('equipamentos')">Equipamentos</button>
-    <button onclick="mostrarAba('ordens')">Ordens de Serviço</button>
-    <button onclick="mostrarAba('usuarios')">Usuários</button>
-  </nav>
+    <div class="corpo-formulario">
 
-  <!-- CLIENTES -->
-  <div id="aba-clientes" class="aba ativa">
-    <h2>Clientes</h2>
-    <form id="form-cliente">
-      <input type="text" id="cli-nome" placeholder="Nome" required>
-      <input type="email" id="cli-email" placeholder="Email" required>
-      <input type="text" id="cli-telefone" placeholder="Telefone" required>
-      <button type="submit">Cadastrar Cliente</button>
-    </form>
-    <table>
-      <thead><tr><th>ID</th><th>Nome</th><th>Email</th><th>Telefone</th><th>Ação</th></tr></thead>
-      <tbody id="lista-clientes"></tbody>
-    </table>
+      <!-- Menu de Navegação Horizontal por Abas -->
+      <nav class="menu-abas">
+        <button type="button" class="btn-aba ativa" onclick="mostrarAba('clientes')">Clientes</button>
+        <button type="button" class="btn-aba" onclick="mostrarAba('tecnicos')">Técnicos</button>
+        <button type="button" class="btn-aba" onclick="mostrarAba('equipamentos')">Equipamentos</button>
+        <button type="button" class="btn-aba" onclick="mostrarAba('ordens')">Ordens de Serviço</button>
+        <button type="button" class="btn-aba" onclick="mostrarAba('usuarios')">Usuários</button>
+      </nav>
+
+      <!-- ABA 1: CLIENTES -->
+      <div id="aba-clientes" class="aba ativa">
+        <div class="secao-container">
+          <div class="pilula-secao">1. Gestão de Clientes</div>
+          <form id="form-cliente" class="linha-campo">
+            <div class="campo flex-1">
+              <label for="cli-nome">Nome Completo:</label>
+              <input type="text" id="cli-nome" placeholder="Digite o nome do cliente" required>
+            </div>
+            <div class="campo flex-1">
+              <label for="cli-email">E-mail:</label>
+              <input type="email" id="cli-email" placeholder="cliente@email.com" required>
+            </div>
+            <div class="campo flex-1">
+              <label for="cli-telefone">Telefone / Telemóvel:</label>
+              <input type="text" id="cli-telefone" placeholder="(00) 00000-0000" required>
+            </div>
+            <button type="submit" class="btn-acao">+ Cadastrar Cliente</button>
+          </form>
+
+          <div class="tabela-container">
+            <table class="tabela-clientes">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nome</th>
+                  <th>Email</th>
+                  <th>Telefone</th>
+                  <th>Ação</th>
+                </tr>
+              </thead>
+              <tbody id="lista-clientes"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ABA 2: TÉCNICOS -->
+      <div id="aba-tecnicos" class="aba">
+        <div class="secao-container">
+          <div class="pilula-secao">2. Gestão de Técnicos</div>
+          <form id="form-tecnico" class="linha-campo">
+            <div class="campo flex-1">
+              <label for="tec-nome">Nome do Técnico:</label>
+              <input type="text" id="tec-nome" placeholder="Digite o nome do técnico" required>
+            </div>
+            <div class="campo flex-1">
+              <label for="tec-especialidade">Especialidade:</label>
+              <input type="text" id="tec-especialidade" placeholder="Ex: Hardware, Redes, Impressoras" required>
+            </div>
+            <div class="campo flex-1">
+              <label for="tec-email">E-mail:</label>
+              <input type="email" id="tec-email" placeholder="tecnico@asai.com" required>
+            </div>
+            <button type="submit" class="btn-acao">+ Cadastrar Técnico</button>
+          </form>
+
+          <div class="tabela-container">
+            <table class="tabela-clientes">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nome</th>
+                  <th>Especialidade</th>
+                  <th>Email</th>
+                  <th>Ação</th>
+                </tr>
+              </thead>
+              <tbody id="lista-tecnicos"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ABA 3: EQUIPAMENTOS -->
+      <div id="aba-equipamentos" class="aba">
+        <div class="secao-container">
+          <div class="pilula-secao">3. Cadastrar Equipamento</div>
+          <form id="form-equipamento" class="linha-campo">
+            <div class="campo flex-1">
+              <label for="eq-nome">Equipamento / Tipo:</label>
+              <input type="text" id="eq-nome" placeholder="Ex: Notebook, Impressora" required>
+            </div>
+            <div class="campo flex-1">
+              <label for="eq-modelo">Modelo / Marca:</label>
+              <input type="text" id="eq-modelo" placeholder="Ex: Dell Vostro, HP LaserJet" required>
+            </div>
+            <div class="campo flex-1">
+              <label for="eq-cliente-id">ID do Cliente Proprietário:</label>
+              <input type="number" id="eq-cliente-id" placeholder="ID do Cliente" required>
+            </div>
+            <button type="submit" class="btn-acao">+ Cadastrar Equipamento</button>
+          </form>
+
+          <div class="tabela-container">
+            <table class="tabela-clientes">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Equipamento</th>
+                  <th>Modelo</th>
+                  <th>Cliente</th>
+                  <th>Ação</th>
+                </tr>
+              </thead>
+              <tbody id="lista-equipamentos"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ABA 4: ORDENS DE SERVIÇO -->
+      <div id="aba-ordens" class="aba">
+        <div class="secao-container">
+          <div class="pilula-secao">4. Abertura de Ordem de Serviço</div>
+          <form id="form-os">
+            <div class="linha-campo">
+              <div class="campo flex-1">
+                <label for="os-cliente-id">ID do Cliente:</label>
+                <input type="number" id="os-cliente-id" placeholder="Digite o ID do cliente" required>
+              </div>
+              <div class="campo flex-1">
+                <label for="os-tecnico-id">ID do Técnico Responsável:</label>
+                <input type="number" id="os-tecnico-id" placeholder="ID do Técnico (Opcional)">
+              </div>
+              <div class="campo flex-1">
+                <label for="os-equipamento-id">ID do Equipamento:</label>
+                <input type="number" id="os-equipamento-id" placeholder="ID do Equipamento (Opcional)">
+              </div>
+            </div>
+
+            <div class="campo">
+              <label for="os-descricao">Descrição Detalhada do Problema:</label>
+              <textarea id="os-descricao" placeholder="Descreva os sintomas ou o pedido de manutenção..." required></textarea>
+            </div>
+
+            <div class="linha-campo">
+              <div class="campo flex-1">
+                <label for="os-status">Status da OS:</label>
+                <select id="os-status">
+                  <option value="Pendente" selected>Pendente</option>
+                  <option value="Em Andamento">Em Andamento</option>
+                  <option value="Concluido">Concluído</option>
+                </select>
+              </div>
+              <button type="submit" class="btn-submeter" style="margin-top: 10px;">Salvar Ordem de Serviço</button>
+            </div>
+          </form>
+
+          <div class="tabela-container" style="margin-top: 25px;">
+            <table class="tabela-clientes">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Cliente</th>
+                  <th>Técnico</th>
+                  <th>Equipamento</th>
+                  <th>Descrição</th>
+                  <th>Status</th>
+                  <th>Ação</th>
+                </tr>
+              </thead>
+              <tbody id="lista-os"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ABA 5: USUÁRIOS DO SISTEMA -->
+      <div id="aba-usuarios" class="aba">
+        <div class="secao-container">
+          <div class="pilula-secao">5. Gestão de Usuários do Sistema</div>
+          <form id="form-usuario" class="linha-campo">
+            <div class="campo flex-1">
+              <label for="usr-nome">Nome do Usuário:</label>
+              <input type="text" id="usr-nome" placeholder="Digite o nome do utilizador" required>
+            </div>
+            <div class="campo flex-1">
+              <label for="usr-email">E-mail de Acesso:</label>
+              <input type="email" id="usr-email" placeholder="usuario@asai.com" required>
+            </div>
+            <button type="submit" class="btn-acao">+ Cadastrar Usuário</button>
+          </form>
+
+          <div class="tabela-container">
+            <table class="tabela-clientes">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nome</th>
+                  <th>Email</th>
+                  <th>Ação</th>
+                </tr>
+              </thead>
+              <tbody id="lista-usuarios"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <footer class="rodape-faixa"></footer>
   </div>
 
-  <!-- TÉCNICOS -->
-  <div id="aba-tecnicos" class="aba">
-    <h2>Técnicos</h2>
-    <form id="form-tecnico">
-      <input type="text" id="tec-nome" placeholder="Nome" required>
-      <input type="text" id="tec-especialidade" placeholder="Especialidade" required>
-      <input type="email" id="tec-email" placeholder="Email" required>
-      <button type="submit">Cadastrar Técnico</button>
-    </form>
-    <table>
-      <thead><tr><th>ID</th><th>Nome</th><th>Especialidade</th><th>Email</th><th>Ação</th></tr></thead>
-      <tbody id="lista-tecnicos"></tbody>
-    </table>
-  </div>
-
-  <!-- EQUIPAMENTOS -->
-  <div id="aba-equipamentos" class="aba">
-    <h2>Equipamentos</h2>
-    <form id="form-equipamento">
-      <input type="text" id="eq-nome" placeholder="Nome/Tipo do Equipamento (Ex: Notebook)" required>
-      <input type="text" id="eq-modelo" placeholder="Modelo (Ex: Dell Vostro)" required>
-      <input type="number" id="eq-cliente-id" placeholder="ID do Cliente Existente" required>
-      <button type="submit">Cadastrar Equipamento</button>
-    </form>
-    <table>
-      <thead><tr><th>ID</th><th>Nome</th><th>Modelo</th><th>Cliente</th><th>Ação</th></tr></thead>
-      <tbody id="lista-equipamentos"></tbody>
-    </table>
-  </div>
-
-  <!-- ORDENS DE SERVIÇO -->
-  <div id="aba-ordens" class="aba">
-    <h2>Ordens de Serviço</h2>
-    <form id="form-os">
-      <input type="number" id="os-cliente-id" placeholder="ID do Cliente Existente" required>
-      <input type="number" id="os-tecnico-id" placeholder="ID do Técnico (Opcional)">
-      <input type="number" id="os-equipamento-id" placeholder="ID do Equipamento (Opcional)">
-      <input type="text" id="os-descricao" placeholder="Descrição do Problema" required>
-      <select id="os-status">
-        <option value="Pendente">Pendente</option>
-        <option value="Em Andamento">Em Andamento</option>
-        <option value="Concluido">Concluído</option>
-      </select>
-      <button type="submit">Criar Ordem de Serviço</button>
-    </form>
-    <table>
-      <thead><tr><th>ID</th><th>Cliente</th><th>Técnico</th><th>Equipamento</th><th>Descrição</th><th>Status</th><th>Ação</th></tr></thead>
-      <tbody id="lista-os"></tbody>
-    </table>
-  </div>
-
-  <!-- USUÁRIOS -->
-  <div id="aba-usuarios" class="aba">
-    <h2>Usuários</h2>
-    <form id="form-usuario">
-      <input type="text" id="usr-nome" placeholder="Nome" required>
-      <input type="email" id="usr-email" placeholder="Email" required>
-      <button type="submit">Cadastrar Usuário</button>
-    </form>
-    <table>
-      <thead><tr><th>ID</th><th>Nome</th><th>Email</th><th>Ação</th></tr></thead>
-      <tbody id="lista-usuarios"></tbody>
-    </table>
-  </div>
-
+  <!-- JavaScript do Sistema -->
   <script>
+    // Troca de Abas
     function mostrarAba(nomeAba) {
       document.querySelectorAll('.aba').forEach(el => el.classList.remove('ativa'));
+      document.querySelectorAll('.btn-aba').forEach(btn => btn.classList.remove('ativa'));
+      
       document.getElementById('aba-' + nomeAba).classList.add('ativa');
+      event.currentTarget.classList.add('ativa');
+
       if(nomeAba === 'clientes') carregarClientes();
       if(nomeAba === 'tecnicos') carregarTecnicos();
       if(nomeAba === 'equipamentos') carregarEquipamentos();
@@ -118,6 +267,7 @@
       if(nomeAba === 'usuarios') carregarUsuarios();
     }
 
+    // Função genérica de requisição
     async function enviarReq(url, metodo, dados) {
       try {
         const res = await fetch(url, {
@@ -139,14 +289,19 @@
 
     // --- CLIENTES ---
     async function carregarClientes() {
-      const res = await fetch('/api/clientes');
-      const dados = await res.json();
-      document.getElementById('lista-clientes').innerHTML = dados.map(c => `
-        <tr>
-          <td>${c.id}</td><td>${c.nome}</td><td>${c.email}</td><td>${c.telefone}</td>
-          <td><button onclick="deletar('/api/clientes/${c.id}', carregarClientes)">Excluir</button></td>
-        </tr>
-      `).join('');
+      try {
+        const res = await fetch('/api/clientes');
+        const dados = await res.json();
+        document.getElementById('lista-clientes').innerHTML = dados.map(c => `
+          <tr>
+            <td>${c.id}</td>
+            <td>${c.nome}</td>
+            <td>${c.email}</td>
+            <td>${c.telefone}</td>
+            <td><button class="btn-deletar" onclick="deletar('/api/clientes/${c.id}', carregarClientes)">Excluir</button></td>
+          </tr>
+        `).join('');
+      } catch(e) {}
     }
 
     document.getElementById('form-cliente').onsubmit = async (e) => {
@@ -161,14 +316,19 @@
 
     // --- TÉCNICOS ---
     async function carregarTecnicos() {
-      const res = await fetch('/api/tecnicos');
-      const dados = await res.json();
-      document.getElementById('lista-tecnicos').innerHTML = dados.map(t => `
-        <tr>
-          <td>${t.id}</td><td>${t.nome}</td><td>${t.especialidade}</td><td>${t.email}</td>
-          <td><button onclick="deletar('/api/tecnicos/${t.id}', carregarTecnicos)">Excluir</button></td>
-        </tr>
-      `).join('');
+      try {
+        const res = await fetch('/api/tecnicos');
+        const dados = await res.json();
+        document.getElementById('lista-tecnicos').innerHTML = dados.map(t => `
+          <tr>
+            <td>${t.id}</td>
+            <td>${t.nome}</td>
+            <td>${t.especialidade}</td>
+            <td>${t.email}</td>
+            <td><button class="btn-deletar" onclick="deletar('/api/tecnicos/${t.id}', carregarTecnicos)">Excluir</button></td>
+          </tr>
+        `).join('');
+      } catch(e) {}
     }
 
     document.getElementById('form-tecnico').onsubmit = async (e) => {
@@ -183,14 +343,19 @@
 
     // --- EQUIPAMENTOS ---
     async function carregarEquipamentos() {
-      const res = await fetch('/api/equipamentos');
-      const dados = await res.json();
-      document.getElementById('lista-equipamentos').innerHTML = dados.map(e => `
-        <tr>
-          <td>${e.id}</td><td>${e.nome}</td><td>${e.modelo}</td><td>${e.cliente_nome || e.cliente_id}</td>
-          <td><button onclick="deletar('/api/equipamentos/${e.id}', carregarEquipamentos)">Excluir</button></td>
-        </tr>
-      `).join('');
+      try {
+        const res = await fetch('/api/equipamentos');
+        const dados = await res.json();
+        document.getElementById('lista-equipamentos').innerHTML = dados.map(e => `
+          <tr>
+            <td>${e.id}</td>
+            <td>${e.nome}</td>
+            <td>${e.modelo}</td>
+            <td>${e.cliente_nome || e.cliente_id}</td>
+            <td><button class="btn-deletar" onclick="deletar('/api/equipamentos/${e.id}', carregarEquipamentos)">Excluir</button></td>
+          </tr>
+        `).join('');
+      } catch(e) {}
     }
 
     document.getElementById('form-equipamento').onsubmit = async (e) => {
@@ -205,19 +370,21 @@
 
     // --- ORDENS DE SERVIÇO ---
     async function carregarOS() {
-      const res = await fetch('/api/ordens_servico');
-      const dados = await res.json();
-      document.getElementById('lista-os').innerHTML = dados.map(os => `
-        <tr>
-          <td>${os.id}</td>
-          <td>${os.cliente_nome || os.cliente_id}</td>
-          <td>${os.tecnico_nome || '-'}</td>
-          <td>${os.equipamento_nome || '-'}</td>
-          <td>${os.descricao}</td>
-          <td>${os.status}</td>
-          <td><button onclick="deletar('/api/ordens_servico/${os.id}', carregarOS)">Excluir</button></td>
-        </tr>
-      `).join('');
+      try {
+        const res = await fetch('/api/ordens_servico');
+        const dados = await res.json();
+        document.getElementById('lista-os').innerHTML = dados.map(os => `
+          <tr>
+            <td>${os.id}</td>
+            <td>${os.cliente_nome || os.cliente_id}</td>
+            <td>${os.tecnico_nome || '-'}</td>
+            <td>${os.equipamento_nome || '-'}</td>
+            <td>${os.descricao}</td>
+            <td><span class="badge-status">${os.status}</span></td>
+            <td><button class="btn-deletar" onclick="deletar('/api/ordens_servico/${os.id}', carregarOS)">Excluir</button></td>
+          </tr>
+        `).join('');
+      } catch(e) {}
     }
 
     document.getElementById('form-os').onsubmit = async (e) => {
@@ -234,14 +401,18 @@
 
     // --- USUÁRIOS ---
     async function carregarUsuarios() {
-      const res = await fetch('/api/usuarios');
-      const dados = await res.json();
-      document.getElementById('lista-usuarios').innerHTML = dados.map(u => `
-        <tr>
-          <td>${u.id}</td><td>${u.nome}</td><td>${u.email}</td>
-          <td><button onclick="deletar('/api/usuarios/${u.id}', carregarUsuarios)">Excluir</button></td>
-        </tr>
-      `).join('');
+      try {
+        const res = await fetch('/api/usuarios');
+        const dados = await res.json();
+        document.getElementById('lista-usuarios').innerHTML = dados.map(u => `
+          <tr>
+            <td>${u.id}</td>
+            <td>${u.nome}</td>
+            <td>${u.email}</td>
+            <td><button class="btn-deletar" onclick="deletar('/api/usuarios/${u.id}', carregarUsuarios)">Excluir</button></td>
+          </tr>
+        `).join('');
+      } catch(e) {}
     }
 
     document.getElementById('form-usuario').onsubmit = async (e) => {
@@ -253,15 +424,15 @@
       if (ok) { e.target.reset(); carregarUsuarios(); }
     };
 
-    // --- EXCLUSÃO ---
+    // --- DELETAR REGISTO ---
     async function deletar(url, callback) {
-      if (confirm('Deseja realmente excluir este registro?')) {
+      if (confirm('Deseja realmente excluir este registo?')) {
         await fetch(url, { method: 'DELETE' });
         callback();
       }
     }
 
-    // Inicializa a primeira aba
+    // Carrega a primeira aba na inicialização
     carregarClientes();
   </script>
 </body>
