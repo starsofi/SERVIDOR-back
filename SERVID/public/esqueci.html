@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recuperar Senha - A.S.A.I.</title>
+    <!-- Liga este HTML ao ficheiro de estilo CSS -->
+    <link rel="stylesheet" href="CSS/esqueci.css">
+</head>
+<body>
+
+
+    <!-- CAIXA DO MEIO -->
+    <main class="main-container">
+        <div class="card-form">
+            
+            <h1>Recuperar Senha</h1>
+            <p class="subtitle">Insira o seu e-mail para receber as instruções</p>
+
+            <!-- Formulário que avisa o JavaScript ao ser enviado -->
+            <form onsubmit="enviarInstrucoes(event)">
+                
+                <div class="section-box">
+                    <h3>Redefinição</h3>
+
+                    <!-- Campo E-mail -->
+                    <div class="input-group">
+                        <label>E-mail cadastrado</label>
+                        <input type="email" id="emailRecuperacao" placeholder="O seu email" required>
+                    </div>
+                </div>
+
+                <!-- Botão principal -->
+                <button type="submit" class="btn-submit">Enviar Código</button>
+
+                <!-- Botão secundário para voltar -->
+                <a href="login.html" class="btn-secondary">Voltar ao Login</a>
+            </form>
+
+        </div>
+    </main>
+
+    <!-- Liga ao ficheiro JavaScript separado -->
+    <script src="esqueci.js"></script>
+
+</body>
+</html>

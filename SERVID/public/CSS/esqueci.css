@@ -1,0 +1,162 @@
+/* --- FUNDO DO SITE --- */
+body {
+    background-color: #03081e; /* Pinta o fundo geral do site de azul escuro */
+    font-family: Arial, sans-serif; /* Define o tipo de letra limpo */
+    margin: 0;
+    margin-top: 200px;                 /* Tira as margens em branco da borda da tela */
+}
+
+.logo-container {
+    margin-left: 10px;         /* Afasta um bocadinho a logo da borda esquerda */
+}
+
+.logo-img {
+    height: 40px;              /* Define a altura correta da imagem da logo */
+}
+
+.nav-links {
+    display: flex;             /* Coloca os links do menu em linha horizontal */
+    gap: 25px;                 /* Espaço de distância entre cada palavra do menu */
+    margin-right: 10px;        /* Afasta os links da borda direita */
+}
+
+.nav-links a {
+    color: #03081e;            /* Cor escura para o texto dos links */
+    text-decoration: none;     /* Tira a linha sublinhada dos links */
+    font-weight: bold;         /* Letra mais grossa nos links */
+}
+
+/* --- CARTÃO BRANCO NO CENTRO --- */
+.main-container {
+    display: flex;
+    justify-content: center;   /* Centra o cartão branco a meio da tela */
+    padding: 40px 20px;        /* Espaço em volta do cartão */
+}
+
+.card-form {
+    background-color: #ffffff; /* Pinta o cartão de branco */
+    width: 100%;
+    max-width: 620px;          /* Largura máxima perfeita para o cartão */
+    padding: 35px;             /* Espaço interior para os textos não colarem */
+    border-radius: 20px;       /* Arredonda os 4 cantos do cartão */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); /* Cria uma sombra suave por baixo do cartão */
+}
+
+.card-form h1 {
+    color: #0b2368;            /* Pinta o título de azul escuro */
+    margin-top: 0;
+}
+
+.subtitle {
+    color: #666;               /* Pinta o subtítulo de cinzento */
+    margin-bottom: 20px;       /* Espaço por baixo do subtítulo */
+}
+
+/* --- CAIXA CINZENTA DE DENTRO --- */
+.section-box {
+    background-color: #f1f5f9; /* Pinta a caixinha dos dados de cinzento claro */
+    padding: 20px;             /* Espaço por dentro da caixa */
+    border-radius: 12px;       /* Cantos arredondados na caixa interior */
+    margin-bottom: 20px;       /* Espaço em baixo da caixa */
+}
+
+.section-box h3 {
+    color: #0b2368;            /* Pinta o título de azul escuro */
+    margin-top: 0;
+}
+
+/* --- CAMPOS ONDE SE ESCREVE (INPUTS) --- */
+.input-group {
+    display: flex;
+    flex-direction: column;    /* Nome do campo em cima, caixinha em baixo */
+    margin-bottom: 15px;       /* Espaço entre um campo e o seguinte */
+}
+
+.input-group label {
+    font-size: 12px;           /* Letra pequena para o nome do campo */
+    color: #475569;            /* Cor cinzenta/azulada para o nome */
+    margin-bottom: 5px;        /* Espaço entre o nome e a caixa de escrita */
+    font-weight: bold;         /* Letra grossa no nome do campo */
+}
+
+.input-group input {
+    height: 40px;              /* Altura da caixinha de escrita */
+    border-radius: 20px;       /* Formato de pílula arredondada */
+    border: none;              /* Sem bordas pretas */
+    background-color: #e2e8f0; /* Fundo cinzento suave na caixa de escrita */
+    padding: 0 15px;           /* Afasta o texto que escreves da borda */
+    outline: none;             /* Tira a linha azul padrão ao clicar */
+}
+
+.input-group input:focus {
+    background-color: #ffffff; /* Fica com fundo branco ao clicar para escrever */
+    box-shadow: 0 0 0 2px #ff8c32; /* Cria um contorno laranja suave ao selecionar */
+}
+
+/* --- BOTÕES --- */
+
+/* Botão Laranja (Enviar) */
+.btn-submit {
+    width: 100%;               /* O botão ocupa a largura inteira */
+    height: 45px;              /* Altura do botão */
+    background-color: #ff8c32; /* Pinta o botão de laranja */
+    color: white;              /* Letras brancas dentro do botão */
+    border: none;              /* Sem bordas */
+    border-radius: 25px;       /* Botão bem arredondado */
+    font-weight: bold;         /* Letra grossa */
+    cursor: pointer;           /* Transforma o cursor numa mãozinha */
+    margin-bottom: 10px;       /* Espaço para separar do botão de baixo */
+}
+
+.btn-submit:hover {
+    background-color: #e07622; /* Laranja mais escuro ao passar o rato por cima */
+}
+
+/* Botão Secundário (Voltar ao Login) */
+.btn-secondary {
+    display: block;
+    text-align: center;        /* Centra o texto no meio do botão */
+    padding: 12px;
+    background-color: transparent; /* Sem cor de fundo (transparente) */
+    color: #0b2368;            /* Texto em azul escuro */
+    border: 2px solid #0b2368; /* Cria uma linha de contorno azul à volta */
+    border-radius: 25px;       /* Cantos arredondados */
+    text-decoration: none;     /* Tira o sublinhado */
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.btn-secondary:hover {
+    background-color: #0b2368; /* O fundo passa a azul escuro ao passar o rato */
+    color: white;              /* As letras mudam automaticamente para branco */
+}
+
+/* ========================================== */
+/* RESPONSIVIDADE (Para telemóveis e tablets) */
+/* ========================================== */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 8px 15px;
+    }
+
+    .nav-links {
+        gap: 12px;
+    }
+
+    .nav-links a {
+        font-size: 13px;
+    }
+
+    .main-container {
+        padding: 15px;
+    }
+
+    .card-form {
+        padding: 20px;
+        border-radius: 15px;
+    }
+
+    .card-form h1 {
+        font-size: 24px;
+    }
+}
