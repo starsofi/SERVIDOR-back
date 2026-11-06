@@ -1,53 +1,73 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faça seu login - A.S.A.I.</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./CSS/criar.css">
+    <title>Criar Conta</title>
+    <!-- Liga este HTML ao ficheiro de estilo CSS -->
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
-   
-       
-      </div>
 
-    <div class="login-container">
-        <div class="login-left">
-            <h2>FAÇA SEU LOGIN</h2>
+    <!-- BARRA DE CIMA -->
+    <header class="navbar">
+        <img src="logo.png" class="logo-img"> <!-- Imagem da logo -->
+        <nav class="nav-links">
+            <a href="indexisa.html">Início</a>
+            <a href="login.html">Login</a>
+            <a href="artigos.html">Artigos</a>
+            <li><a href="#" onclick="window.open('https://wa.me/5511930770585', '_blank'); return false;">Suporte</a></li>
+        </nav>
+    </header>
+
+    <!-- CAIXA DO MEIO -->
+    <main class="main-container">
+        <div class="card-form">
             
-            <form>
-                <div class="input-group">
-                    <label for="email">E-MAIL</label>
-                    <input type="email" id="email" required>
+            <h1>Criar Conta</h1>
+            <p class="subtitle">Insira os seus dados</p>
+
+            <!-- Formulário -->
+            <form onsubmit="mostrarMensagem(event)">
+                
+                <div class="section-box">
+                    <h3>Dados</h3>
+
+                    <!-- Campo Nome -->
+                    <div class="input-group">
+                        <label>Nome</label>
+                        <input type="text" id="campoNome" placeholder="O seu nome" required>
+                    </div>
+
+                    <!-- Campo E-mail -->
+                    <div class="input-group">
+                        <label>E-mail</label>
+                        <input type="email" placeholder="O seu email" required>
+                    </div>
+
+                    <!-- Campo CPF -->
+                    <div class="input-group">
+                        <label>CPF</label>
+                        <input type="text" placeholder="000.000.000-00" required>
+                    </div>
+
+                    <!-- Campo Telefone -->
+                    <div class="input-group">
+                        <label>Telefone / Telemóvel</label>
+                        <input type="tel" placeholder="(00) 00000-0000" required>
+                    </div>
                 </div>
 
-                <div class="input-group">
-                    <label for="senha">SENHA</label>
-                    <input type="password" id="senha" required>
-                </div>
+                <!-- Botão principal de Criar -->
+                <button type="submit" class="btn-submit">Criar</button>
 
-                <div class="options-row">
-                    <label class="remember-me">
-                        <input type="checkbox"> Lembrar de mim
-                    </label>
-                    <a href="#" class="forgot-link">Esqueci minha senha</a>
-                </div>
-
-                <button type="submit" class="btn-entrar">ENTRAR</button>
+                <!-- Botão secundário para quem já tem conta -->
+                <a href="login.html" class="btn-secondary">Entre no A.S.A.I.</a>
             </form>
 
-            <p class="signup-text">
-                Não tem conta ainda? <a href="cadastro.html">Crie agora</a>
-            </p>
         </div>
+    </main>
 
-        <div class="login-right">
-            <img src="logo.png" alt="A.S.A.I. Manutenções" class="banner-img">
-        </div>
-    </div>
+    <!-- Liga ao ficheiro de JavaScript -->
+    <script src="script.js"></script>
 
 </body>
 </html>
