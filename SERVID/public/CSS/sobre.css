@@ -1,0 +1,107 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;  
+}
+
+.main-header {
+  background-color: #fc8b2a; 
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  padding: 10px 40px; 
+  width: 100%;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  height: 45px;
+  width: auto;
+  object-fit: contain;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  gap: 30px; 
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 25px; 
+}
+
+.nav-links a {
+  color: #000000; 
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  transition: opacity 0.2s ease;
+}
+
+.nav-links a:hover {
+  opacity: 0.7; 
+}
+
+.menu-hamburger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 5px; 
+  padding: 5px;
+}
+
+.menu-hamburger span {
+  display: block;
+  width: 25px;
+  height: 2px;
+  background-color: #000000; 
+  transition: 0.3s ease;
+}
+
+.content-wrapper {
+  background-color: #0c0947; 
+  min-height: calc(100vh - 65px); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.sobreasai {
+  background-color: #183678;
+  max-width: 800px;
+  width: 100%;
+  padding: 50px 40px; 
+  border-radius: 5px;      
+  text-align: center;     
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+}
+
+.sobreasai h2 {
+  color: #ffffff;
+  font-size: 24px;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+
+.sobreasai p {
+  color: #8fa2b1;
+  font-size: 15px;
+  line-height: 1.6;        
+  margin-bottom: 20px;      
+  text-align: justify;      
+}
+
+.about-card p:last-child {
+  margin-bottom: 0;
+}

@@ -1,0 +1,142 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+.main-header {
+    background-color: #fc8b2a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+    width: 100%;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    height: 45px;
+    width: auto;
+    object-fit: contain;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    color: #000000;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+}
+
+.nav-links a:hover {
+    opacity: 0.7;
+}
+
+.menu-hamburger {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px;
+}
+
+.menu-hamburger span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background-color: #000000;
+    transition: 0.3s ease;
+}
+
+.content-wrapper {
+    background-color: #0c0947; 
+    min-height: calc(100vh - 65px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+}
+
+.team-container {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.member-card {
+    background-color: #183678; 
+    border-radius: 4px;
+    padding: 20px 30px;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    width: 75%; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.position-1 { align-self: flex-start; }
+.position-2 { align-self: center; }
+.position-3 { align-self: flex-start; }
+.position-4 { align-self: center; }
+
+.avatar-container {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.member-info h3 {
+    color: #ffffff;
+    font-size: 18px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.member-info p {
+    color: #8fa2b1;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.member-info p strong {
+    color: #7b8fa7;
+}
+
+@media (max-width: 768px) {
+    .member-card {
+        width: 100%;
+        align-self: center !important;
+        flex-direction: column;
+        text-align: center;
+    }
+}

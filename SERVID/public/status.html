@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A.S.A.I. Manutenções - Status do Pedido</title>
+  <link rel="stylesheet" href="status.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+  <header class="main-header">
+    <div class="logo-container">
+      <img src="logo.png" alt="Logo A.S.A.I" class="logo-img">
+    </div>
+    <div class="nav-container">
+      <nav class="navbar">
+        <ul class="nav-links">
+          <li><a href="index.html">Início</a></li>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="./artigos.html">Artigos</a></li>
+          <li><a href="#" onclick="window.open('https://wa.me/5511930770585', '_blank'); return false;">Suporte</a></li>
+        </ul>
+      </nav>
+      <button class="menu-hamburger" aria-label="Abrir menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="page-container">
+    <div class="status-wrapper">
+      
+      <div class="stepper">
+        <div class="stepper-line"></div>
+
+        <div class="step">
+          <div class="step-circle">
+            <i class="fa-regular fa-file-lines"></i>
+          </div>
+          <span class="step-label">Pedido feito</span>
+        </div>
+
+        <div class="step">
+          <div class="step-circle">
+            <i class="fa-solid fa-mug-hot"></i>
+          </div>
+          <span class="step-label">Em execução</span>
+        </div>
+
+        <div class="step">
+          <div class="step-circle">
+            <i class="fa-solid fa-magnifying-glass-plus"></i>
+          </div>
+          <span class="step-label">Em revisão</span>
+        </div>
+
+        <div class="step">
+          <div class="step-circle">
+            <i class="fa-solid fa-check"></i>
+          </div>
+          <span class="step-label">Finalizado</span>
+        </div>
+      </div>
+
+      <!-- Cartão de Datas -->
+      <div class="dates-card">
+        <div class="date-item">
+          <h3>Pedido feito em:</h3>
+          <p>07/10/2026</p>
+        </div>
+        <div class="date-item">
+          <h3>Data de início:</h3>
+          <p>10/10/2026</p>
+        </div>
+        <div class="date-item">
+          <h3>Revisão iniciada em:</h3>
+          <p>15/10/2026</p>
+        </div>
+        <div class="date-item">
+          <h3>Finalizado em:</h3>
+          <p>18/10/2026</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+</body>
+</html>

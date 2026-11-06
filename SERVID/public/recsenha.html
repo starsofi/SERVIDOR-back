@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recuperar Senha - A.S.A.I.</title>
+    <link rel="stylesheet" href="esqueci.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo-container">
+            <img src="logo.png" class="logo-img"> 
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Início</a>
+            <a href="login.html">Login</a>
+            <a href="artigos.html">Artigos</a>
+            <li><a href="#" onclick="window.open('https://wa.me/5511930770585', '_blank'); return false;">Suporte</a></li>
+        </nav>
+        
+    </header>
+
+    <main class="main-container">
+        <div class="card-form">
+            
+            <h1>Recuperar Senha</h1>
+            <p class="subtitle">Insira o seu e-mail para receber as instruções</p>
+
+            <form onsubmit="enviarInstrucoes(event)">
+                
+                <div class="section-box">
+                    <h3>Redefinição</h3>
+
+                    <div class="input-group">
+                        <label>E-mail cadastrado</label>
+                        <input type="email" id="emailRecuperacao" placeholder="O seu email" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit">Enviar Código</button>
+
+                <a href="login2.html" class="btn-secondary">Voltar ao Login</a>
+            </form>
+
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

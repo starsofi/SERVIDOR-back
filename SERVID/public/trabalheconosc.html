@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trabalhe Conosco - A.S.A.I. Manutenções</title>
+  <link rel="stylesheet" href="./trabalhec.css">
+</head>
+<body>
+
+  <!-- Cabeçalho / Navbar -->
+  <header class="main-header">
+    <div class="logo-container">
+      <img src="logo.png" alt="Logo A.S.A.I." class="logo-img">
+    </div>
+    <div class="nav-container">
+      <nav class="navbar">
+        <ul class="nav-links">
+          <li><a href="./index.html">Início</a></li>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="./artigos.html">Artigos</a></li>
+          <li><a href="#" onclick="window.open('https://wa.me/5511930770585', '_blank'); return false;">Suporte</a></li>
+        </ul>
+      </nav>
+      <button class="menu-hamburger" aria-label="Abrir menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Container Principal -->
+  <main class="main-container">
+    <section class="card-cadastro">
+      
+      <!-- Topo do Card -->
+      <div class="card-header">
+        <div class="card-title-area">
+          <h1>TRABALHE<br>CONOSCO</h1>
+          <p class="subtitle">Cadastre-se para ser um<br><strong>Técnico Credenciado</strong></p>
+          <ul class="vantagens-list">
+            <li>✓ Receba chamados de serviços na sua região</li>
+            <li>✓ Faça a sua própria agenda</li>
+            <li>✓ Tenha flexibilidade de horários</li>
+          </ul>
+        </div>
+        
+        <div class="card-illustration">
+          <img src="pecas.png" alt="Chave de Fenda e Engrenagem" class="img-peca">
+        </div>
+      </div>
+
+      <!-- Formulário -->
+      <form class="form-cadastro">
+        
+        <!-- Bloco 1: Dados Pessoais -->
+        <fieldset class="form-section">
+          <legend>1. Dados Pessoais</legend>
+          
+          <div class="form-grid-2">
+            <div class="input-group full-width">
+              <label for="nome">Nome Completo</label>
+              <input type="text" id="nome" name="nome">
+            </div>
+
+            <div class="input-group full-width">
+              <label for="email">E-mail</label>
+              <input type="email" id="email" name="email">
+            </div>
+
+            <div class="input-group">
+              <label for="telefone">Telefone/WhatsApp</label>
+              <input type="tel" id="telefone" name="telefone">
+            </div>
+
+            <div class="input-group">
+              <label for="cpf_cnpj">CPF/CNPJ</label>
+              <input type="text" id="cpf_cnpj" name="cpf_cnpj">
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Bloco 2: Localização -->
+        <details class="accordion-section">
+          <summary>2. Localização <span class="arrow">⌄</span></summary>
+          <div class="accordion-content">
+            <div class="input-group">
+              <label for="cep">CEP</label>
+              <input type="text" id="cep" name="cep">
+            </div>
+            <div class="input-row">
+              <div class="input-group">
+                <label for="cidade">Cidade</label>
+                <input type="text" id="cidade" name="cidade">
+              </div>
+              <div class="input-group">
+                <label for="estado">Estado</label>
+                <input type="text" id="estado" name="estado">
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Bloco 3: Especialidades -->
+        <details class="accordion-section">
+          <summary>3. Especialidades <span class="arrow">⌄</span></summary>
+          <div class="accordion-content">
+            <div class="input-group">
+              <label for="especialidade">Área de Atuação</label>
+              <input type="text" id="especialidade" name="especialidade" placeholder="Ex: Eletricista, Encanador...">
+            </div>
+          </div>
+        </details>
+
+        <!-- Botão de Envio -->
+        <button type="submit" class="btn-submit">CADASTRAR-SE AGORA</button>
+
+      </form>
+    </section>
+  </main>
+
+</body>
+</html>

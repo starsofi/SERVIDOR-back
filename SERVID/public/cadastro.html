@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Ordem de Serviço - ASAI</title>
+   
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="cadastro.css">
+</head>
+<body>
+
+    <div class="pagina-formulario">
+        
+        <header class="cabecalho-novo">
+            <div class="bloco-logo">
+                <div class="logo-wrapper">
+                    <img src="pecas.png" alt="Logótipo ASAI" class="logo-img" onerror="this.src='peças.png';">
+                </div>
+                <div class="texto-logo">
+                    <h1 class="logo-titulo">A.S.A.I.</h1>
+                    <p class="logo-subtitulo">MANUTENÇÕES</p>
+                </div>
+            </div>
+            <div class="bloco-titulo">
+                <span class="tag-os">SISTEMA DE OS</span>
+                <h2 class="titulo-destaque">Formulário de Cadastro</h2>
+            </div>
+        </header>
+
+        <form id="form-os" class="corpo-formulario">
+
+            <div class="secao-container">
+                <div class="pilula-secao">1. Dados do Cliente</div>
+
+                <div class="linha-campo">
+                    <div class="campo flex-1">
+                        <label for="busca-cliente">Buscar / Nome do Cliente:</label>
+                        <input type="text" id="busca-cliente" placeholder="Digite o nome ou CPF/CNPJ...">
+                    </div>
+                    <button type="button" class="btn-acao">+ Novo Cliente</button>
+                </div>
+
+                <div class="tabela-container">
+                    <table class="tabela-clientes">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Nome</th>
+                                <th>Documento</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>001</td>
+                                <td>JOÃO SILVA</td>
+                                <td>123.456.789-00</td>
+                            </tr>
+                            <tr>
+                                <td>002</td>
+                                <td>MARIA SOUZA</td>
+                                <td>00.123.456/0001-99</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="secao-container">
+                <div class="pilula-secao">2. Detalhes do Equipamento</div>
+
+                <div class="linha-campo">
+                    <div class="campo flex-1">
+                        <label for="equipamento">Equipamento:</label>
+                        <input type="text" id="equipamento" placeholder="Ex: Impressora, Notebook">
+                    </div>
+                    <div class="campo flex-1">
+                        <label for="marca">Marca:</label>
+                        <input type="text" id="marca" placeholder="Ex: HP, Dell">
+                    </div>
+                    <div class="campo flex-1">
+                        <label for="modelo">Modelo:</label>
+                        <input type="text" id="modelo" placeholder="Ex: LaserJet 1020">
+                    </div>
+                    <div class="campo flex-1">
+                        <label for="num-serie">Número de Série:</label>
+                        <input type="text" id="num-serie" placeholder="Nº de Série do aparelho">
+                    </div>
+                </div>
+            </div>
+
+            <div class="secao-container">
+                <div class="pilula-secao">3. Detalhamento do Defeito</div>
+
+                <div class="campo">
+                    <label for="descricao-defeito">Descrição do Problema / Defeito:</label>
+                    <textarea id="descricao-defeito" placeholder="Por favor, descreva em detalhe os problemas apresentados..."></textarea>
+                </div>
+
+                <div class="linha-campo">
+                    <div class="campo flex-1">
+                        <label for="prioridade">Prioridade:</label>
+                        <select id="prioridade">
+                            <option value="baixa">Baixa</option>
+                            <option value="media" selected>Média</option>
+                            <option value="alta">Alta</option>
+                        </select>
+                    </div>
+                    <div class="campo flex-1">
+                        <label>Anexar Foto do Equipamento:</label>
+                        <input type="file" id="foto-equipamento" class="input-file">
+                    </div>
+                </div>
+            </div>
+
+            <div class="secao-container">
+                <div class="pilula-secao">4. Agendamento e Atribuição</div>
+
+                <div class="linha-campo">
+                    <div class="campo flex-1">
+                        <label for="tecnico">Técnico Responsável:</label>
+                        <select id="tecnico">
+                            <option value="" disabled selected>Selecione o técnico</option>
+                            <option value="Sofia Gonçalves">Sofia Gonçalves</option>
+                            <option value="Ananda">Ananda</option>
+                            <option value="Agnes Aisha">Agnes Aisha</option>
+                            <option value="Isabelli Santos">Isabelli Santos</option>
+                        </select>
+                    </div>
+                    <div class="campo flex-1">
+                        <label for="data-agendamento">Data de Agendamento:</label>
+                        <input type="date" id="data-agendamento">
+                    </div>
+                    <div class="campo flex-1">
+                        <label for="hora-inicio">Hora de Início:</label>
+                        <input type="time" id="hora-inicio">
+                    </div>
+                    <div class="campo flex-1">
+                        <label for="hora-fim">Hora de Fim:</label>
+                        <input type="time" id="hora-fim">
+                    </div>
+                </div>
+            </div>
+
+            <div class="secao-container">
+                <div class="pilula-secao">5. Peças e Serviços (Opcional)</div>
+
+                <div class="linha-campo">
+                    <div class="campo flex-1">
+                        <label>Peça:</label>
+                        <input type="text" placeholder="Nome da peça">
+                    </div>
+                    <div class="campo flex-1">
+                        <label>Valor (R$):</label>
+                        <input type="text" placeholder="0,00">
+                    </div>
+                    <div class="campo flex-1">
+                        <label>Serviço:</label>
+                        <input type="text" placeholder="Nome do serviço">
+                    </div>
+                    <div class="campo flex-1">
+                        <label>Valor (R$):</label>
+                        <input type="text" placeholder="0,00">
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-btn-submit">
+                <button type="submit" class="btn-submeter">Salvar Ordem de Serviço</button>
+            </div>
+
+        </form>
+
+        <footer class="rodape-faixa"></footer>
+
+    </div>
+
+</body>
+</html>

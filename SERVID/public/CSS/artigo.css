@@ -1,0 +1,142 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;  
+}
+
+.main-header {
+  background-color: #fc8b2a; 
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  padding: 10px 40px; 
+  width: 100%;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  height: 45px;
+  width: auto;
+  object-fit: contain;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  gap: 30px; 
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 25px; 
+}
+
+.nav-links a {
+  color: #000000; 
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  transition: opacity 0.2s ease;
+}
+
+.nav-links a:hover {
+  opacity: 0.7; 
+}
+
+.menu-hamburger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 5px; 
+  padding: 5px;
+}
+
+.menu-hamburger span {
+  display: block;
+  width: 25px;
+  height: 2px;
+  background-color: #000000; 
+  transition: 0.3s ease;
+}
+
+
+
+.content-container {
+  background-color: #050529; 
+  min-height: calc(100vh - 65px);
+  padding: 40px 10%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr; 
+  gap: 30px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.card {
+  background-color: #12245c; 
+  border-radius: 6px;
+  padding: 35px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  min-height: 150px;
+}
+
+.right-column .card {
+  min-height: 240px; 
+}
+
+.card h2 {
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  line-height: 1.3;
+}
+
+.btn-acessar {
+  display: inline-block;
+  background-color: #1b5cb3; 
+  color: #ffffff;
+  text-decoration: none;
+  padding: 12px 45px;
+  border-radius: 25px;
+  font-size: 15px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.btn-acessar:hover {
+  background-color: #2671d9;
+}
+
+
+@media (max-width: 768px) {
+  .cards-grid {
+    grid-template-columns: 1fr; 
+  }
+  .right-column .card {
+    min-height: 150px; 
+  }
+}
