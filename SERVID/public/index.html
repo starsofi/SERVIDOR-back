@@ -1,442 +1,54 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sistema de Gestão de Serviços - A.S.A.I.</title>
-  
-  <!-- Fonte Inter -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Estilos CSS -->
-  <link rel="stylesheet" href="CSS/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faça seu login - A.S.A.I.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./CSS/login.css">
 </head>
 <body>
-
-  <div class="pagina-formulario">
-    
-    <!-- Cabeçalho -->
-    <header class="cabecalho-novo">
-      <div class="bloco-logo">
-        <div class="logo-wrapper">
-          <img src="pecas.png" alt="Logótipo ASAI" class="logo-img" onerror="this.src='peças.png';">
-        </div>
-        <div class="texto-logo">
-          <h1 class="logo-titulo">A.S.A.I.</h1>
-          <p class="logo-subtitulo">MANUTENÇÕES</p>
-        </div>
-      </div>
-      <div class="bloco-titulo">
-        <span class="tag-os">SISTEMA DE GESTÃO</span>
-        <h2 class="titulo-destaque">Painel Operacional</h2>
-      </div>
-    </header>
-
-    <div class="corpo-formulario">
-
-      <!-- Menu de Navegação Horizontal por Abas -->
-      <nav class="menu-abas">
-        <button type="button" class="btn-aba ativa" onclick="mostrarAba('clientes')">Clientes</button>
-        <button type="button" class="btn-aba" onclick="mostrarAba('tecnicos')">Técnicos</button>
-        <button type="button" class="btn-aba" onclick="mostrarAba('equipamentos')">Equipamentos</button>
-        <button type="button" class="btn-aba" onclick="mostrarAba('ordens')">Ordens de Serviço</button>
-        <button type="button" class="btn-aba" onclick="mostrarAba('usuarios')">Usuários</button>
-      </nav>
-
-      <!-- ABA 1: CLIENTES -->
-      <div id="aba-clientes" class="aba ativa">
-        <div class="secao-container">
-          <div class="pilula-secao">1. Gestão de Clientes</div>
-          <form id="form-cliente" class="linha-campo">
-            <div class="campo flex-1">
-              <label for="cli-nome">Nome Completo:</label>
-              <input type="text" id="cli-nome" placeholder="Digite o nome do cliente" required>
-            </div>
-            <div class="campo flex-1">
-              <label for="cli-email">E-mail:</label>
-              <input type="email" id="cli-email" placeholder="cliente@email.com" required>
-            </div>
-            <div class="campo flex-1">
-              <label for="cli-telefone">Telefone / Telemóvel:</label>
-              <input type="text" id="cli-telefone" placeholder="(00) 00000-0000" required>
-            </div>
-            <button type="submit" class="btn-acao">+ Cadastrar Cliente</button>
-          </form>
-
-          <div class="tabela-container">
-            <table class="tabela-clientes">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Nome</th>
-                  <th>Email</th>
-                  <th>Telefone</th>
-                  <th>Ação</th>
-                </tr>
-              </thead>
-              <tbody id="lista-clientes"></tbody>
-            </table>
-          </div>
-        </div>
+   
+       
       </div>
 
-      <!-- ABA 2: TÉCNICOS -->
-      <div id="aba-tecnicos" class="aba">
-        <div class="secao-container">
-          <div class="pilula-secao">2. Gestão de Técnicos</div>
-          <form id="form-tecnico" class="linha-campo">
-            <div class="campo flex-1">
-              <label for="tec-nome">Nome do Técnico:</label>
-              <input type="text" id="tec-nome" placeholder="Digite o nome do técnico" required>
-            </div>
-            <div class="campo flex-1">
-              <label for="tec-especialidade">Especialidade:</label>
-              <input type="text" id="tec-especialidade" placeholder="Ex: Hardware, Redes, Impressoras" required>
-            </div>
-            <div class="campo flex-1">
-              <label for="tec-email">E-mail:</label>
-              <input type="email" id="tec-email" placeholder="tecnico@asai.com" required>
-            </div>
-            <button type="submit" class="btn-acao">+ Cadastrar Técnico</button>
-          </form>
+    <div class="login-container">
+        <div class="login-left">
+            <h2>FAÇA SEU LOGIN</h2>
+            
+            <form>
+                <div class="input-group">
+                    <label for="email">E-MAIL</label>
+                    <input type="email" id="email" required>
+                </div>
 
-          <div class="tabela-container">
-            <table class="tabela-clientes">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Nome</th>
-                  <th>Especialidade</th>
-                  <th>Email</th>
-                  <th>Ação</th>
-                </tr>
-              </thead>
-              <tbody id="lista-tecnicos"></tbody>
-            </table>
-          </div>
+                <div class="input-group">
+                    <label for="senha">SENHA</label>
+                    <input type="password" id="senha" required>
+                </div>
+
+                <div class="options-row">
+                    <label class="remember-me">
+                        <input type="checkbox"> Lembrar de mim
+                    </label>
+                    <a href="esqueci.html" class="forgot-link">Esqueci minha senha</a>
+                </div>
+
+                <button type="submit" class="btn-entrar">ENTRAR</button>
+                <a href="indexisa.html"></a>
+            </form>
+
+            <p class="signup-text">
+                Não tem conta ainda? <a href="criar.html">Crie agora</a>
+            </p>
         </div>
-      </div>
 
-      <!-- ABA 3: EQUIPAMENTOS -->
-      <div id="aba-equipamentos" class="aba">
-        <div class="secao-container">
-          <div class="pilula-secao">3. Cadastrar Equipamento</div>
-          <form id="form-equipamento" class="linha-campo">
-            <div class="campo flex-1">
-              <label for="eq-nome">Equipamento / Tipo:</label>
-              <input type="text" id="eq-nome" placeholder="Ex: Notebook, Impressora" required>
-            </div>
-            <div class="campo flex-1">
-              <label for="eq-modelo">Modelo / Marca:</label>
-              <input type="text" id="eq-modelo" placeholder="Ex: Dell Vostro, HP LaserJet" required>
-            </div>
-            <div class="campo flex-1">
-              <label for="eq-cliente-id">ID do Cliente Proprietário:</label>
-              <input type="number" id="eq-cliente-id" placeholder="ID do Cliente" required>
-            </div>
-            <button type="submit" class="btn-acao">+ Cadastrar Equipamento</button>
-          </form>
-
-          <div class="tabela-container">
-            <table class="tabela-clientes">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Equipamento</th>
-                  <th>Modelo</th>
-                  <th>Cliente</th>
-                  <th>Ação</th>
-                </tr>
-              </thead>
-              <tbody id="lista-equipamentos"></tbody>
-            </table>
-          </div>
+        <div class="login-right">
+            <img src="logo.png" alt="A.S.A.I. Manutenções" class="banner-img">
         </div>
-      </div>
-
-      <!-- ABA 4: ORDENS DE SERVIÇO -->
-      <div id="aba-ordens" class="aba">
-        <div class="secao-container">
-          <div class="pilula-secao">4. Abertura de Ordem de Serviço</div>
-          <form id="form-os">
-            <div class="linha-campo">
-              <div class="campo flex-1">
-                <label for="os-cliente-id">ID do Cliente:</label>
-                <input type="number" id="os-cliente-id" placeholder="Digite o ID do cliente" required>
-              </div>
-              <div class="campo flex-1">
-                <label for="os-tecnico-id">ID do Técnico Responsável:</label>
-                <input type="number" id="os-tecnico-id" placeholder="ID do Técnico (Opcional)">
-              </div>
-              <div class="campo flex-1">
-                <label for="os-equipamento-id">ID do Equipamento:</label>
-                <input type="number" id="os-equipamento-id" placeholder="ID do Equipamento (Opcional)">
-              </div>
-            </div>
-
-            <div class="campo">
-              <label for="os-descricao">Descrição Detalhada do Problema:</label>
-              <textarea id="os-descricao" placeholder="Descreva os sintomas ou o pedido de manutenção..." required></textarea>
-            </div>
-
-            <div class="linha-campo">
-              <div class="campo flex-1">
-                <label for="os-status">Status da OS:</label>
-                <select id="os-status">
-                  <option value="Pendente" selected>Pendente</option>
-                  <option value="Em Andamento">Em Andamento</option>
-                  <option value="Concluido">Concluído</option>
-                </select>
-              </div>
-              <button type="submit" class="btn-submeter" style="margin-top: 10px;">Salvar Ordem de Serviço</button>
-            </div>
-          </form>
-
-          <div class="tabela-container" style="margin-top: 25px;">
-            <table class="tabela-clientes">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Cliente</th>
-                  <th>Técnico</th>
-                  <th>Equipamento</th>
-                  <th>Descrição</th>
-                  <th>Status</th>
-                  <th>Ação</th>
-                </tr>
-              </thead>
-              <tbody id="lista-os"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- ABA 5: USUÁRIOS DO SISTEMA -->
-      <div id="aba-usuarios" class="aba">
-        <div class="secao-container">
-          <div class="pilula-secao">5. Gestão de Usuários do Sistema</div>
-          <form id="form-usuario" class="linha-campo">
-            <div class="campo flex-1">
-              <label for="usr-nome">Nome do Usuário:</label>
-              <input type="text" id="usr-nome" placeholder="Digite o nome do utilizador" required>
-            </div>
-            <div class="campo flex-1">
-              <label for="usr-email">E-mail de Acesso:</label>
-              <input type="email" id="usr-email" placeholder="usuario@asai.com" required>
-            </div>
-            <button type="submit" class="btn-acao">+ Cadastrar Usuário</button>
-          </form>
-
-          <div class="tabela-container">
-            <table class="tabela-clientes">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Nome</th>
-                  <th>Email</th>
-                  <th>Ação</th>
-                </tr>
-              </thead>
-              <tbody id="lista-usuarios"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
     </div>
 
-    <footer class="rodape-faixa"></footer>
-  </div>
-
-  <!-- JavaScript do Sistema -->
-  <script>
-    // Troca de Abas
-    function mostrarAba(nomeAba) {
-      document.querySelectorAll('.aba').forEach(el => el.classList.remove('ativa'));
-      document.querySelectorAll('.btn-aba').forEach(btn => btn.classList.remove('ativa'));
-      
-      document.getElementById('aba-' + nomeAba).classList.add('ativa');
-      event.currentTarget.classList.add('ativa');
-
-      if(nomeAba === 'clientes') carregarClientes();
-      if(nomeAba === 'tecnicos') carregarTecnicos();
-      if(nomeAba === 'equipamentos') carregarEquipamentos();
-      if(nomeAba === 'ordens') carregarOS();
-      if(nomeAba === 'usuarios') carregarUsuarios();
-    }
-
-    // Função genérica de requisição
-    async function enviarReq(url, metodo, dados) {
-      try {
-        const res = await fetch(url, {
-          method: metodo,
-          headers: { 'Content-Type': 'application/json' },
-          body: dados ? JSON.stringify(dados) : null
-        });
-        if (!res.ok) {
-          const err = await res.json();
-          alert('Erro no servidor: ' + (err.erro || 'Verifique os dados preenchidos.'));
-          return false;
-        }
-        return true;
-      } catch (e) {
-        alert('Erro ao se comunicar com o servidor!');
-        return false;
-      }
-    }
-
-    // --- CLIENTES ---
-    async function carregarClientes() {
-      try {
-        const res = await fetch('/api/clientes');
-        const dados = await res.json();
-        document.getElementById('lista-clientes').innerHTML = dados.map(c => `
-          <tr>
-            <td>${c.id}</td>
-            <td>${c.nome}</td>
-            <td>${c.email}</td>
-            <td>${c.telefone}</td>
-            <td><button class="btn-deletar" onclick="deletar('/api/clientes/${c.id}', carregarClientes)">Excluir</button></td>
-          </tr>
-        `).join('');
-      } catch(e) {}
-    }
-
-    document.getElementById('form-cliente').onsubmit = async (e) => {
-      e.preventDefault();
-      const ok = await enviarReq('/api/clientes', 'POST', {
-        nome: document.getElementById('cli-nome').value,
-        email: document.getElementById('cli-email').value,
-        telefone: document.getElementById('cli-telefone').value
-      });
-      if (ok) { e.target.reset(); carregarClientes(); }
-    };
-
-    // --- TÉCNICOS ---
-    async function carregarTecnicos() {
-      try {
-        const res = await fetch('/api/tecnicos');
-        const dados = await res.json();
-        document.getElementById('lista-tecnicos').innerHTML = dados.map(t => `
-          <tr>
-            <td>${t.id}</td>
-            <td>${t.nome}</td>
-            <td>${t.especialidade}</td>
-            <td>${t.email}</td>
-            <td><button class="btn-deletar" onclick="deletar('/api/tecnicos/${t.id}', carregarTecnicos)">Excluir</button></td>
-          </tr>
-        `).join('');
-      } catch(e) {}
-    }
-
-    document.getElementById('form-tecnico').onsubmit = async (e) => {
-      e.preventDefault();
-      const ok = await enviarReq('/api/tecnicos', 'POST', {
-        nome: document.getElementById('tec-nome').value,
-        especialidade: document.getElementById('tec-especialidade').value,
-        email: document.getElementById('tec-email').value
-      });
-      if (ok) { e.target.reset(); carregarTecnicos(); }
-    };
-
-    // --- EQUIPAMENTOS ---
-    async function carregarEquipamentos() {
-      try {
-        const res = await fetch('/api/equipamentos');
-        const dados = await res.json();
-        document.getElementById('lista-equipamentos').innerHTML = dados.map(e => `
-          <tr>
-            <td>${e.id}</td>
-            <td>${e.nome}</td>
-            <td>${e.modelo}</td>
-            <td>${e.cliente_nome || e.cliente_id}</td>
-            <td><button class="btn-deletar" onclick="deletar('/api/equipamentos/${e.id}', carregarEquipamentos)">Excluir</button></td>
-          </tr>
-        `).join('');
-      } catch(e) {}
-    }
-
-    document.getElementById('form-equipamento').onsubmit = async (e) => {
-      e.preventDefault();
-      const ok = await enviarReq('/api/equipamentos', 'POST', {
-        nome: document.getElementById('eq-nome').value,
-        modelo: document.getElementById('eq-modelo').value,
-        cliente_id: Number(document.getElementById('eq-cliente-id').value)
-      });
-      if (ok) { e.target.reset(); carregarEquipamentos(); }
-    };
-
-    // --- ORDENS DE SERVIÇO ---
-    async function carregarOS() {
-      try {
-        const res = await fetch('/api/ordens_servico');
-        const dados = await res.json();
-        document.getElementById('lista-os').innerHTML = dados.map(os => `
-          <tr>
-            <td>${os.id}</td>
-            <td>${os.cliente_nome || os.cliente_id}</td>
-            <td>${os.tecnico_nome || '-'}</td>
-            <td>${os.equipamento_nome || '-'}</td>
-            <td>${os.descricao}</td>
-            <td><span class="badge-status">${os.status}</span></td>
-            <td><button class="btn-deletar" onclick="deletar('/api/ordens_servico/${os.id}', carregarOS)">Excluir</button></td>
-          </tr>
-        `).join('');
-      } catch(e) {}
-    }
-
-
-    
-
-    document.getElementById('form-os').onsubmit = async (e) => {
-      e.preventDefault();
-      const ok = await enviarReq('/api/ordens_servico', 'POST', {
-        cliente_id: Number(document.getElementById('os-cliente-id').value),
-        tecnico_id: document.getElementById('os-tecnico-id').value ? Number(document.getElementById('os-tecnico-id').value) : null,
-        equipamento_id: document.getElementById('os-equipamento-id').value ? Number(document.getElementById('os-equipamento-id').value) : null,
-        descricao: document.getElementById('os-descricao').value,
-        status: document.getElementById('os-status').value
-      });
-      if (ok) { e.target.reset(); carregarOS(); }
-    };
-
-    // --- USUÁRIOS ---
-    async function carregarUsuarios() {
-      try {
-        const res = await fetch('/api/usuarios');
-        const dados = await res.json();
-        document.getElementById('lista-usuarios').innerHTML = dados.map(u => `
-          <tr>
-            <td>${u.id}</td>
-            <td>${u.nome}</td>
-            <td>${u.email}</td>
-            <td><button class="btn-deletar" onclick="deletar('/api/usuarios/${u.id}', carregarUsuarios)">Excluir</button></td>
-          </tr>
-        `).join('');
-      } catch(e) {}
-    }
-
-    document.getElementById('form-usuario').onsubmit = async (e) => {
-      e.preventDefault();
-      const ok = await enviarReq('/api/usuarios', 'POST', {
-        nome: document.getElementById('usr-nome').value,
-        email: document.getElementById('usr-email').value
-      });
-      if (ok) { e.target.reset(); carregarUsuarios(); }
-    };
-
-    // --- DELETAR REGISTO ---
-    async function deletar(url, callback) {
-      if (confirm('Deseja realmente excluir este registo?')) {
-        await fetch(url, { method: 'DELETE' });
-        callback();
-      }
-    }
-
-    // Carrega a primeira aba na inicialização
-    carregarClientes();
-  </script>
 </body>
 </html>
