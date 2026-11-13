@@ -47,15 +47,25 @@ banco.exec(`
     CREATE TABLE IF NOT EXISTS usuarios (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         nome TEXT NOT NULL,
-        email TEXT NOT NULL
+        cpf TEXT NOT NULL UNIQUE,
+        senha TEXT NOT NULL
     );
 `);
+
+// ==========================================
+// 2. CADASTRO FIXO DOS 4 USUÁRIOS AUTORIZADOS
+// ==========================================
+const inserirUsuarioFixo = banco.prepare('INSERT OR IGNORE INTO usuarios (nome, cpf, senha) VALUES (?, ?, ?)');
+inserirUsuarioFixo.run('Pessoa 1', '111.111.111-11', 'senha1');
+inserirUsuarioFixo.run('Pessoa 2', '222.222.222-22', 'senha2');
+inserirUsuarioFixo.run('Pessoa 3', '333.333.333-33', 'senha3');
+inserirUsuarioFixo.run('Pessoa 4', '444.444.444-44', 'senha4');
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // ==========================================
-// 2. ROTAS DE CLIENTES
+// 3. ROTAS DE CLIENTES
 // ==========================================
 app.get('/api/clientes', (req, res) => {
     try {
@@ -89,7 +99,7 @@ app.delete('/api/clientes/:id', (req, res) => {
 });
 
 // ==========================================
-// 3. ROTAS DE TÉCNICOS
+// 4. ROTAS DE TÉCNICOS
 // ==========================================
 app.get('/api/tecnicos', (req, res) => {
     try {
@@ -123,7 +133,7 @@ app.delete('/api/tecnicos/:id', (req, res) => {
 });
 
 // ==========================================
-// 4. ROTAS DE EQUIPAMENTOS
+// 5. ROTAS DE EQUIPAMENTOS
 // ==========================================
 app.get('/api/equipamentos', (req, res) => {
     try {
@@ -163,7 +173,7 @@ app.delete('/api/equipamentos/:id', (req, res) => {
 });
 
 // ==========================================
-// 5. ROTAS DE ORDENS DE SERVIÇO (OS)
+// 6. ROTAS DE ORDENS DE SERVIÇO (OS)
 // ==========================================
 app.get('/api/ordens_servico', (req, res) => {
     try {
@@ -216,11 +226,11 @@ app.delete('/api/ordens_servico/:id', (req, res) => {
 });
 
 // ==========================================
-// 6. ROTAS DE USUÁRIOS
+// 7. ROTAS DE USUÁRIOS E LOGIN (RESTRITO AOS 4)
 // ==========================================
 app.get('/api/usuarios', (req, res) => {
     try {
-        const usuarios = banco.prepare('SELECT * FROM usuarios ORDER BY id DESC').all();
+        const usuarios = banco.prepare('SELECT id, nome, cpf FROM usuarios ORDER BY id ASC').all();
         res.json(usuarios);
     } catch (err) {
         res.status(500).json({ erro: 'Erro ao procurar utilizadores: ' + err.message });
@@ -228,24 +238,19 @@ app.get('/api/usuarios', (req, res) => {
 });
 
 app.post('/api/usuarios', (req, res) => {
-    try {
-        const { nome, email } = req.body;
-        if (!nome || !email) {
-            return res.status(400).json({ erro: 'Preencha todos os campos!' });
-        }
-        banco.prepare('INSERT INTO usuarios (nome, email) VALUES (?, ?)').run(nome, email);
-        res.json({ ok: true });
-    } catch (err) {
-        res.status(500).json({ erro: 'Erro ao guardar utilizador: ' + err.message });
-    }
+    return res.status(403).json({ erro: 'Acesso restrito! Apenas os 4 usuários autorizados podem utilizar o sistema.' });
 });
 
-app.delete('/api/usuarios/:id', (req, res) => {
+app.post('/api/login', (req, res) => {
     try {
-        banco.prepare('DELETE FROM usuarios WHERE id = ?').run(req.params.id);
-        res.json({ ok: true });
+        const { nome, cpf, senha } = req.body;
+        const usuario = banco.prepare('SELECT id, nome, cpf FROM usuarios WHERE nome = ? AND cpf = ? AND senha = ?').get(nome, cpf, senha);
+        if (!usuario) {
+            return res.status(401).json({ erro: 'Nome, CPF ou senha incorretos!' });
+        }
+        res.json({ ok: true, usuario });
     } catch (err) {
-        res.status(500).json({ erro: 'Erro ao eliminar utilizador: ' + err.message });
+        res.status(500).json({ erro: 'Erro ao realizar login: ' + err.message });
     }
 });
 

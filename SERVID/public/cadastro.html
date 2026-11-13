@@ -8,8 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./CSS/cadastro.css">
-    <link rel="icon" type="image/png" href="pecas.png">
+    <link rel="stylesheet" href="CSS/cadastro.css">
+    <link rel="icon" type="image/png" href="fotos/pecas.png">
 </head>
 <body>
 
@@ -18,7 +18,7 @@
         <header class="cabecalho-novo">
             <div class="bloco-logo">
                 <div class="logo-wrapper">
-                    <img src="pecas.png" alt="Logótipo ASAI" class="logo-img" onerror="this.src='peças.png';">
+            <img src="./fotos/pecas.png" alt="Logótipo ASAI" class="logo-img">
                 </div>
                 <div class="texto-logo">
                     <h1 class="logo-titulo">A.S.A.I.</h1>
@@ -100,70 +100,10 @@
                     <textarea id="descricao-defeito" placeholder="Por favor, descreva em detalhe os problemas apresentados..."></textarea>
                 </div>
 
-                <div class="linha-campo">
-                    <div class="campo flex-1">
-                        <label for="prioridade">Prioridade:</label>
-                        <select id="prioridade">
-                            <option value="baixa">Baixa</option>
-                            <option value="media" selected>Média</option>
-                            <option value="alta">Alta</option>
-                        </select>
-                    </div>
+                
                     <div class="campo flex-1">
                         <label>Anexar Foto do Equipamento:</label>
                         <input type="file" id="foto-equipamento" class="input-file">
-                    </div>
-                </div>
-            </div>
-
-            <div class="secao-container">
-                <div class="pilula-secao">4. Agendamento e Atribuição</div>
-
-                <div class="linha-campo">
-                    <div class="campo flex-1">
-                        <label for="tecnico">Técnico Responsável:</label>
-                        <select id="tecnico">
-                            <option value="" disabled selected>Selecione o técnico</option>
-                            <option value="Sofia Gonçalves">Sofia Gonçalves</option>
-                            <option value="Ananda">Ananda</option>
-                            <option value="Agnes Aisha">Agnes Aisha</option>
-                            <option value="Isabelli Santos">Isabelli Santos</option>
-                        </select>
-                    </div>
-                    <div class="campo flex-1">
-                        <label for="data-agendamento">Data de Agendamento:</label>
-                        <input type="date" id="data-agendamento">
-                    </div>
-                    <div class="campo flex-1">
-                        <label for="hora-inicio">Hora de Início:</label>
-                        <input type="time" id="hora-inicio">
-                    </div>
-                    <div class="campo flex-1">
-                        <label for="hora-fim">Hora de Fim:</label>
-                        <input type="time" id="hora-fim">
-                    </div>
-                </div>
-            </div>
-
-            <div class="secao-container">
-                <div class="pilula-secao">5. Peças e Serviços (Opcional)</div>
-
-                <div class="linha-campo">
-                    <div class="campo flex-1">
-                        <label>Peça:</label>
-                        <input type="text" placeholder="Nome da peça">
-                    </div>
-                    <div class="campo flex-1">
-                        <label>Valor (R$):</label>
-                        <input type="text" placeholder="0,00">
-                    </div>
-                    <div class="campo flex-1">
-                        <label>Serviço:</label>
-                        <input type="text" placeholder="Nome do serviço">
-                    </div>
-                    <div class="campo flex-1">
-                        <label>Valor (R$):</label>
-                        <input type="text" placeholder="0,00">
                     </div>
                 </div>
             </div>
