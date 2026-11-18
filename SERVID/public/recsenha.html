@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recuperar Senha - A.S.A.I.</title>
     <link rel="stylesheet" href="./CSS/recsenha.css">
     <link rel="icon" type="image/png" href="./fotos/pecas.png">
@@ -9,15 +11,14 @@
 
     <header class="navbar">
         <div class="logo-container">
-            <img src="fotos/logo.png" class="logo-img"> 
+            <img src="./fotos/logo.png" alt="Logo A.S.A.I" class="logo-img"> 
         </div>
         <nav class="nav-links">
-            <a href="indexisa.html">Início</a>
+            <a href="./index.html">Início</a>
             <a href="artigos.html">Artigos</a>
-            <li><a href="index.html">Empresa</a></li>
-            <li><a href="#" onclick="window.open('https://wa.me/5511930770585', '_blank'); return false;">Suporte</a></li>
+            <a href="./indexso.html">Empresa</a>
+            <a href="#" onclick="window.open('https://wa.me/5511930770585', '_blank'); return false;">Suporte</a>
         </nav>
-        
     </header>
 
     <main class="main-container">
@@ -32,20 +33,27 @@
                     <h3>Redefinição</h3>
 
                     <div class="input-group">
-                        <label>E-mail cadastrado</label>
+                        <label for="emailRecuperacao">E-mail cadastrado</label>
                         <input type="email" id="emailRecuperacao" placeholder="O seu email" required>
                     </div>
                 </div>
 
                 <button type="submit" class="btn-submit">Enviar Código</button>
 
-                <a href="login2.html" class="btn-secondary">Voltar ao Login</a>
+                <a href="login.html" class="btn-secondary">Voltar ao Login</a>
             </form>
 
         </div>
     </main>
 
-    <script src="script.js"></script>
+    <script>
+        function enviarInstrucoes(event) {
+            event.preventDefault();
+            const email = document.getElementById('emailRecuperacao').value;
+            alert('Instruções de recuperação enviadas para: ' + email);
+            window.location.href = 'login.html';
+        }
+    </script>
 
 </body>
 </html>

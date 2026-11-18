@@ -11,13 +11,12 @@
     <link rel="icon" type="image/png" href="./fotos/pecas.png">
 </head>
 <body>
-</div>
 
     <div class="login-container">
         <div class="login-left">
             <h2>FAÇA SEU LOGIN</h2>
             
-            <form>
+            <form id="form-login-cliente">
                 <div class="input-group">
                     <label for="email">E-MAIL</label>
                     <input type="email" id="email" required>
@@ -32,11 +31,10 @@
                     <label class="remember-me">
                         <input type="checkbox"> Lembrar de mim
                     </label>
-                    <a href="esqueci.html" class="forgot-link">Esqueci minha senha</a>
+                    <a href="recsenha.html" class="forgot-link">Esqueci minha senha</a>
                 </div>
 
                 <button type="submit" class="btn-entrar">ENTRAR</button>
-                <a href="cadastro.html"></a>
             </form>
 
             <p class="signup-text">
@@ -45,9 +43,41 @@
         </div>
 
         <div class="login-right">
-            <img src="fotos/logo.png" alt="A.S.A.I. Manutenções" class="banner-img">
+            <img src="./fotos/logo.png" alt="A.S.A.I. Manutenções" class="banner-img">
         </div>
     </div>
+    
+    <script>
+        document.getElementById('form-login-cliente').onsubmit = async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
+
+            try {
+                const res = await fetch('/api/site/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, senha })
+                });
+
+                const dados = await res.json();
+
+                if (!res.ok) {
+                    alert(dados.erro || 'E-mail ou senha inválidos.');
+                    return;
+                }
+
+                // Guarda os dados do cliente logado na tabela reservada
+                localStorage.setItem('clienteSite', JSON.stringify(dados.cliente));
+
+                // Redireciona para a página de registrar a ordem de serviço
+                window.location.href = 'cadastro.html';
+            } catch (err) {
+                alert('Erro ao conectar com o servidor. Verifique se o servidor está rodando na porta 3000.');
+            }
+        };
+    </script>
 
 </body>
 </html>

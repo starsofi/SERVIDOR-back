@@ -1,63 +1,76 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Criar Conta</title>
-    <!-- Liga este HTML ao ficheiro de estilo CSS -->
-    <link rel="stylesheet" href="CSS/criar.css">
+    <link rel="stylesheet" href="./CSS/criar.css">
     <link rel="icon" type="image/png" href="./fotos/pecas.png">
 </head>
 <body>
-
-    <!-- CAIXA DO MEIO -->
     <main class="main-container">
         <div class="card-form">
-            
             <h1>Criar Conta</h1>
             <p class="subtitle">Insira os seus dados</p>
 
-            <!-- Formulário -->
-            <form onsubmit="mostrarMensagem(event)">
-                
+            <form id="form-criar-conta">
                 <div class="section-box">
                     <h3>Dados</h3>
-
-                    <!-- Campo Nome -->
                     <div class="input-group">
-                        <label>Nome</label>
+                        <label for="campoNome">Nome</label>
                         <input type="text" id="campoNome" placeholder="O seu nome" required>
                     </div>
-
-                    <!-- Campo E-mail -->
                     <div class="input-group">
-                        <label>E-mail</label>
-                        <input type="email" placeholder="O seu email" required>
+                        <label for="campoEmail">E-mail</label>
+                        <input type="email" id="campoEmail" placeholder="O seu email" required>
                     </div>
-
-                    <!-- Campo CPF -->
                     <div class="input-group">
-                        <label>CPF</label>
-                        <input type="text" placeholder="000.000.000-00" required>
+                        <label for="campoCpf">CPF</label>
+                        <input type="text" id="campoCpf" placeholder="000.000.000-00" required>
                     </div>
-
-                    <!-- Campo Telefone -->
                     <div class="input-group">
-                        <label>Telefone / Telemóvel</label>
-                        <input type="tel" placeholder="(00) 00000-0000" required>
+                        <label for="campoTelefone">Telefone / Telemóvel</label>
+                        <input type="tel" id="campoTelefone" placeholder="(00) 00000-0000" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="campoSenha">Senha</label>
+                        <input type="password" id="campoSenha" placeholder="Crie uma senha" required>
                     </div>
                 </div>
-
-                <!-- Botão principal de Criar -->
                 <button type="submit" class="btn-submit">Criar</button>
-
-                <!-- Botão secundário para quem já tem conta -->
                 <a href="login.html" class="btn-secondary">Entre no A.S.A.I.</a>
             </form>
-
         </div>
     </main>
 
-    <!-- Liga ao ficheiro de JavaScript -->
-    <script src="criar.js"></script>
+    <script>
+        document.getElementById('form-criar-conta').onsubmit = async (e) => {
+            e.preventDefault();
+            const dados = {
+                nome: document.getElementById('campoNome').value,
+                email: document.getElementById('campoEmail').value,
+                cpf: document.getElementById('campoCpf').value,
+                telefone: document.getElementById('campoTelefone').value,
+                senha: document.getElementById('campoSenha').value
+            };
 
+            try {
+                const res = await fetch('/api/site/criar-conta', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(dados)
+                });
+                const resposta = await res.json();
+                if (!res.ok) {
+                    alert(resposta.erro || 'Erro ao criar conta.');
+                    return;
+                }
+                alert('Conta criada com sucesso! Agora faça seu login.');
+                window.location.href = 'login.html';
+            } catch (err) {
+                alert('Erro ao conectar com o servidor.');
+            }
+        };
+    </script>
 </body>
 </html>

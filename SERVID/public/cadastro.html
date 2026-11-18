@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Ordem de Serviço - ASAI</title>
-   
+    <title>Solicitar Ordem de Serviço - ASAI</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="CSS/cadastro.css">
-    <link rel="icon" type="image/png" href="fotos/pecas.png">
+    <link rel="stylesheet" href="../CSS/cadastro.css">
+    <link rel="icon" type="image/png" href="./fotos/pecas.png">
 </head>
 <body>
 
@@ -18,7 +17,7 @@
         <header class="cabecalho-novo">
             <div class="bloco-logo">
                 <div class="logo-wrapper">
-            <img src="./fotos/pecas.png" alt="Logótipo ASAI" class="logo-img">
+                    <img src="./fotos/pecas.png" alt="Logótipo ASAI" class="logo-img">
                 </div>
                 <div class="texto-logo">
                     <h1 class="logo-titulo">A.S.A.I.</h1>
@@ -26,46 +25,29 @@
                 </div>
             </div>
             <div class="bloco-titulo">
-                <span class="tag-os">SISTEMA DE OS</span>
-                <h2 class="titulo-destaque">Formulário de Cadastro</h2>
+                <span class="tag-os">ÁREA DO CLIENTE</span>
+                <h2 class="titulo-destaque">Registrar Ordem de Serviço</h2>
             </div>
         </header>
 
         <form id="form-os" class="corpo-formulario">
 
             <div class="secao-container">
-                <div class="pilula-secao">1. Dados do Cliente</div>
+                <div class="pilula-secao">1. Seus Dados</div>
 
                 <div class="linha-campo">
                     <div class="campo flex-1">
-                        <label for="busca-cliente">Buscar / Nome do Cliente:</label>
-                        <input type="text" id="busca-cliente" placeholder="Digite o nome ou CPF/CNPJ...">
+                        <label for="cli-nome">Nome Completo:</label>
+                        <input type="text" id="cli-nome" required>
                     </div>
-                    <button type="button" class="btn-acao">+ Novo Cliente</button>
-                </div>
-
-                <div class="tabela-container">
-                    <table class="tabela-clientes">
-                        <thead>
-                            <tr>
-                                <th>Código</th>
-                                <th>Nome</th>
-                                <th>Documento</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>001</td>
-                                <td>JOÃO SILVA</td>
-                                <td>123.456.789-00</td>
-                            </tr>
-                            <tr>
-                                <td>002</td>
-                                <td>MARIA SOUZA</td>
-                                <td>00.123.456/0001-99</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="campo flex-1">
+                        <label for="cli-email">E-mail:</label>
+                        <input type="email" id="cli-email" required>
+                    </div>
+                    <div class="campo flex-1">
+                        <label for="cli-telefone">Telefone / WhatsApp:</label>
+                        <input type="text" id="cli-telefone" required>
+                    </div>
                 </div>
             </div>
 
@@ -75,19 +57,11 @@
                 <div class="linha-campo">
                     <div class="campo flex-1">
                         <label for="equipamento">Equipamento:</label>
-                        <input type="text" id="equipamento" placeholder="Ex: Impressora, Notebook">
+                        <input type="text" id="equipamento" placeholder="Ex: Notebook, Impressora, PC" required>
                     </div>
                     <div class="campo flex-1">
-                        <label for="marca">Marca:</label>
-                        <input type="text" id="marca" placeholder="Ex: HP, Dell">
-                    </div>
-                    <div class="campo flex-1">
-                        <label for="modelo">Modelo:</label>
-                        <input type="text" id="modelo" placeholder="Ex: LaserJet 1020">
-                    </div>
-                    <div class="campo flex-1">
-                        <label for="num-serie">Número de Série:</label>
-                        <input type="text" id="num-serie" placeholder="Nº de Série do aparelho">
+                        <label for="modelo">Marca e Modelo:</label>
+                        <input type="text" id="modelo" placeholder="Ex: Dell Vostro / HP LaserJet 1020" required>
                     </div>
                 </div>
             </div>
@@ -97,19 +71,13 @@
 
                 <div class="campo">
                     <label for="descricao-defeito">Descrição do Problema / Defeito:</label>
-                    <textarea id="descricao-defeito" placeholder="Por favor, descreva em detalhe os problemas apresentados..."></textarea>
-                </div>
-
-                
-                    <div class="campo flex-1">
-                        <label>Anexar Foto do Equipamento:</label>
-                        <input type="file" id="foto-equipamento" class="input-file">
-                    </div>
+                    <textarea id="descricao-defeito" placeholder="Descreva em detalhes o que está acontecendo com o equipamento..." required></textarea>
                 </div>
             </div>
 
-            <div class="container-btn-submit">
-                <button type="submit" class="btn-submeter">Salvar Ordem de Serviço</button>
+            <div class="container-btn-submit" style="display: flex; gap: 15px; justify-content: flex-end;">
+                <a href="../index.html" class="btn-acao" style="text-decoration: none; display: inline-flex; align-items: center;">Voltar</a>
+                <button type="submit" class="btn-submeter">Enviar Ordem de Serviço</button>
             </div>
 
         </form>
@@ -117,6 +85,49 @@
         <footer class="rodape-faixa"></footer>
 
     </div>
+
+    <script>
+        const clienteSalvo = JSON.parse(localStorage.getItem('clienteSite') || 'null');
+
+        if (clienteSalvo) {
+            document.getElementById('cli-nome').value = clienteSalvo.nome || '';
+            document.getElementById('cli-email').value = clienteSalvo.email || '';
+            document.getElementById('cli-telefone').value = clienteSalvo.telefone || '';
+        }
+
+        document.getElementById('form-os').onsubmit = async (e) => {
+            e.preventDefault();
+
+            const dados = {
+                nome: document.getElementById('cli-nome').value,
+                email: document.getElementById('cli-email').value,
+                telefone: document.getElementById('cli-telefone').value,
+                equipamento: document.getElementById('equipamento').value,
+                modelo: document.getElementById('modelo').value,
+                problema: document.getElementById('descricao-defeito').value
+            };
+
+            try {
+                const res = await fetch('/api/site/registrar-pedido', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(dados)
+                });
+
+                const resposta = await res.json();
+
+                if (!res.ok) {
+                    alert(resposta.erro || 'Erro ao enviar solicitação.');
+                    return;
+                }
+
+                alert('Ordem de Serviço registrada com sucesso!\nO número do seu protocolo é: #' + resposta.protocolo);
+                window.location.href = '../index.html'; 
+            } catch (err) {
+                alert('Erro ao conectar com o servidor.');
+            }
+        };
+    </script>
 
 </body>
 </html>

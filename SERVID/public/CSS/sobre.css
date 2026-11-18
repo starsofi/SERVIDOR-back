@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: sans-serif;  
+  font-family: 'Inter', sans-serif;
 }
 
 .main-header {
@@ -67,43 +67,143 @@
   transition: 0.3s ease;
 }
 
+/* CONTEÚDO PRINCIPAL MODERNIZADO */
 .content-wrapper {
   background-color: #0c0947; 
   min-height: calc(100vh - 65px); 
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 40px 20px;
+  padding: 50px 20px;
 }
 
 .sobreasai {
   background-color: #183678;
-  max-width: 800px;
+  border-top: 5px solid #fc8b2a;
+  max-width: 920px;
   width: 100%;
-  padding: 50px 40px; 
-  border-radius: 5px;      
-  text-align: center;     
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
-  height: 680px;
+  padding: 45px 50px; 
+  border-radius: 14px;      
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+.sobre-topo {
+  margin-bottom: 26px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  padding-bottom: 20px;
+}
+
+.tag-destaque {
+  display: inline-block;
+  background-color: rgba(252, 139, 42, 0.18);
+  color: #fc8b2a;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  margin-bottom: 10px;
 }
 
 .sobreasai h2 {
   color: #ffffff;
-  font-size: 24px;
-  margin-bottom: 30px;
-  font-weight: 600;
-  margin-top: 100px;
+  font-size: 30px;
+  font-weight: 800;
+  margin-bottom: 6px;
 }
 
+.subtitulo-sobre {
+  color: #cbd5e1;
+  font-size: 16px;
+}
 
-.sobreasai p {
-  color: #8fa2b1;
+.texto-principal p {
+  color: #e2e8f0;
   font-size: 15px;
-  line-height: 1.6;        
-  margin-bottom: 20px;      
+  line-height: 1.75;        
+  margin-bottom: 18px;      
   text-align: justify;      
 }
 
-.about-card p:last-child {
-  margin-bottom: 0;
+.texto-principal strong {
+  color: #fc8b2a;
+}
+
+/* 3 PILARES EM GRADE */
+.pilares-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin: 30px 0;
+}
+
+.pilar-card {
+  background-color: #0f2354;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 4px solid #fc8b2a;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.pilar-card h3 {
+  color: #fc8b2a;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.pilar-card p {
+  color: #cbd5e1;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+/* RODAPÉ DO CARTÃO */
+.rodape-sobre {
+  background-color: #0f2354;
+  border-radius: 10px;
+  padding: 22px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.frase-assinatura {
+  color: #ffffff;
+  font-size: 15px;
+}
+
+.frase-assinatura strong {
+  color: #fc8b2a;
+}
+
+.btn-solicitar {
+  background-color: #fc8b2a;
+  color: #0c0947;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 15px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.btn-solicitar:hover {
+  background-color: #ff9c47;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .sobreasai {
+    padding: 30px 22px;
+  }
+  .pilares-grid {
+    grid-template-columns: 1fr;
+  }
+  .rodape-sobre {
+    flex-direction: column;
+    text-align: center;
+  }
 }

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Gestão de Serviços - A.S.A.I.</title>
+  
+  <!-- Fonte Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Estilos CSS e Ícone -->
+  <link rel="stylesheet" href="./CSS/style.css">
+  <link rel="icon" type="image/png" href="./fotos/pecas.png">
+</head>
+<body>
+
+  <div class="pagina-formulario">
+    
+    <!-- Cabeçalho -->
+    <header class="cabecalho-novo">
+      <div class="bloco-logo">
+        <div class="logo-wrapper">
+          <img src="./fotos/pecas.png" alt="Logótipo ASAI" class="logo-img">
+        </div>
+        <div class="texto-logo">
+          <h1 class="logo-titulo">A.S.A.I.</h1>
+          <p class="logo-subtitulo">MANUTENÇÕES</p>
+        </div>
+      </div>
+      <div class="bloco-titulo">
+        <span class="tag-os">SISTEMA DE GESTÃO</span>
+        <h2 class="titulo-destaque">Painel Operacional</h2>
+      </div>
+    </header>
+
+    <div class="corpo-formulario">
+
+      <!-- TELA 1: ACESSO RESTRITO (NOME, CPF E SENHA) - Bloqueia o resto até identificar -->
+      <div id="tela-login" class="secao-container" style="max-width: 500px; margin: 20px auto;">
+        <div class="pilula-secao">Acesso Restrito - Identificação do Usuário</div>
+        <form id="form-login" style="display: flex; flex-direction: column; gap: 15px;">
+          <div class="campo" style="width: 100%;">
+            <label for="login-nome">Nome do Usuário:</label>
+            <input type="text" id="login-nome" placeholder="Digite seu nome completo" style="width: 100%; box-sizing: border-box;" required>
+          </div>
+          <div class="campo" style="width: 100%;">
+            <label for="login-cpf">CPF Autorizado:</label>
+            <input type="text" id="login-cpf" placeholder="000.000.000-00" style="width: 100%; box-sizing: border-box;" required>
+          </div>
+          <div class="campo" style="width: 100%;">
+            <label for="login-senha">Senha:</label>
+            <input type="password" id="login-senha" placeholder="Digite sua senha" style="width: 100%; box-sizing: border-box; padding: 12px 15px; border: 1px solid #d1d5db; border-radius: 10px; font-size: 14px;" required>
+          </div>
+          <button type="submit" class="btn-acao" style="width: 100%; margin-top: 10px;">Entrar no Sistema</button>
+        </form>
+      </div>
+
+      <!-- PAINEL INTERNO (Só aparece depois que passar pela identificação acima) -->
+      <div id="painel-restrito" style="display: none;">
+
+        <!-- Barra de boas-vindas e botão Sair -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding: 0 5px;">
+          <span id="usuario-logado-texto" style="font-weight: 600; color: #1e293b;"></span>
+          <button type="button" onclick="sairSistema()" class="btn-deletar">Sair</button>
+        </div>
+
+        <!-- Menu de Navegação Horizontal por Abas -->
+        <nav class="menu-abas">
+          <button type="button" class="btn-aba ativa" onclick="mostrarAba('clientes', this)">Clientes</button>
+          <button type="button" class="btn-aba" onclick="mostrarAba('tecnicos', this)">Técnicos</button>
+          <button type="button" class="btn-aba" onclick="mostrarAba('equipamentos', this)">Equipamentos</button>
+          <button type="button" class="btn-aba" onclick="mostrarAba('ordens', this)">Ordens de Serviço</button>
+        </nav>
+
+        <!-- ABA 1: CLIENTES -->
+        <div id="aba-clientes" class="aba ativa">
+          <div class="secao-container">
+            <div class="pilula-secao">1. Gestão de Clientes</div>
+            <form id="form-cliente" class="linha-campo">
+              <div class="campo flex-1">
+                <label for="cli-nome">Nome Completo:</label>
+                <input type="text" id="cli-nome" placeholder="Digite o nome do cliente" required>
+              </div>
+              <div class="campo flex-1">
+                <label for="cli-email">E-mail:</label>
+                <input type="email" id="cli-email" placeholder="cliente@email.com" required>
+              </div>
+              <div class="campo flex-1">
+                <label for="cli-telefone">Telefone / Telemóvel:</label>
+                <input type="text" id="cli-telefone" placeholder="(00) 00000-0000" required>
+              </div>
+              <button type="submit" class="btn-acao">+ Cadastrar Cliente</button>
+            </form>
+
+            <div class="tabela-container">
+              <table class="tabela-clientes">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Ação</th>
+                  </tr>
+                </thead>
+                <tbody id="lista-clientes"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ABA 2: TÉCNICOS -->
+        <div id="aba-tecnicos" class="aba">
+          <div class="secao-container">
+            <div class="pilula-secao">2. Gestão de Técnicos</div>
+            <form id="form-tecnico" class="linha-campo">
+              <div class="campo flex-1">
+                <label for="tec-nome">Nome do Técnico:</label>
+                <input type="text" id="tec-nome" placeholder="Digite o nome do técnico" required>
+              </div>
+              <div class="campo flex-1">
+                <label for="tec-especialidade">Especialidade:</label>
+                <input type="text" id="tec-especialidade" placeholder="Ex: Hardware, Redes, Impressoras" required>
+              </div>
+              <div class="campo flex-1">
+                <label for="tec-email">E-mail:</label>
+                <input type="email" id="tec-email" placeholder="tecnico@asai.com" required>
+              </div>
+              <button type="submit" class="btn-acao">+ Cadastrar Técnico</button>
+            </form>
+
+            <div class="tabela-container">
+              <table class="tabela-clientes">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Especialidade</th>
+                    <th>Email</th>
+                    <th>Ação</th>
+                  </tr>
+                </thead>
+                <tbody id="lista-tecnicos"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ABA 3: EQUIPAMENTOS -->
+        <div id="aba-equipamentos" class="aba">
+          <div class="secao-container">
+            <div class="pilula-secao">3. Cadastrar Equipamento</div>
+            <form id="form-equipamento" class="linha-campo">
+              <div class="campo flex-1">
+                <label for="eq-nome">Equipamento / Tipo:</label>
+                <input type="text" id="eq-nome" placeholder="Ex: Notebook, Impressora" required>
+              </div>
+              <div class="campo flex-1">
+                <label for="eq-modelo">Modelo / Marca:</label>
+                <input type="text" id="eq-modelo" placeholder="Ex: Dell Vostro, HP LaserJet" required>
+              </div>
+              <div class="campo flex-1">
+                <label for="eq-cliente-id">ID do Cliente Proprietário:</label>
+                <input type="number" id="eq-cliente-id" placeholder="ID do Cliente" required>
+              </div>
+              <button type="submit" class="btn-acao">+ Cadastrar Equipamento</button>
+            </form>
+
+            <div class="tabela-container">
+              <table class="tabela-clientes">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Equipamento</th>
+                    <th>Modelo</th>
+                    <th>Cliente</th>
+                    <th>Ação</th>
+                  </tr>
+                </thead>
+                <tbody id="lista-equipamentos"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ABA 4: ORDENS DE SERVIÇO -->
+        <div id="aba-ordens" class="aba">
+          <div class="secao-container">
+            <div class="pilula-secao">4. Abertura de Ordem de Serviço</div>
+            <form id="form-os">
+              <div class="linha-campo">
+                <div class="campo flex-1">
+                  <label for="os-cliente-id">ID do Cliente:</label>
+                  <input type="number" id="os-cliente-id" placeholder="Digite o ID do cliente" required>
+                </div>
+                <div class="campo flex-1">
+                  <label for="os-tecnico-id">ID do Técnico Responsável:</label>
+                  <input type="number" id="os-tecnico-id" placeholder="ID do Técnico (Opcional)">
+                </div>
+                <div class="campo flex-1">
+                  <label for="os-equipamento-id">ID do Equipamento:</label>
+                  <input type="number" id="os-equipamento-id" placeholder="ID do Equipamento (Opcional)">
+                </div>
+              </div>
+
+              <div class="campo">
+                <label for="os-descricao">Descrição Detalhada do Problema:</label>
