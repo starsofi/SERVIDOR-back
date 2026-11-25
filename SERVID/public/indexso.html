@@ -37,7 +37,7 @@
 
     <div class="corpo-formulario">
 
-      <!-- TELA 1: ACESSO RESTRITO (NOME, CPF E SENHA) - Bloqueia o resto até identificar -->
+      <!-- TELA 1: ACESSO RESTRITO (NOME, CPF E SENHA) -->
       <div id="tela-login" class="secao-container" style="max-width: 500px; margin: 20px auto;">
         <div class="pilula-secao">Acesso Restrito - Identificação do Usuário</div>
         <form id="form-login" style="display: flex; flex-direction: column; gap: 15px;">
@@ -47,12 +47,13 @@
           </div>
           <div class="campo" style="width: 100%;">
             <label for="login-cpf">CPF Autorizado:</label>
-            <input type="text" id="login-cpf" placeholder="000.000.000-00" style="width: 100%; box-sizing: border-box;" required>
+            <input type="text" id="login-cpf" placeholder="000.000.000-00" maxlength="14" style="width: 100%; box-sizing: border-box;" required>
           </div>
           <div class="campo" style="width: 100%;">
             <label for="login-senha">Senha:</label>
             <input type="password" id="login-senha" placeholder="Digite sua senha" style="width: 100%; box-sizing: border-box; padding: 12px 15px; border: 1px solid #d1d5db; border-radius: 10px; font-size: 14px;" required>
           </div>
+          <p id="erro-login" style="color: #dc2626; font-size: 13px; font-weight: 600; display: none; margin: 0;"></p>
           <button type="submit" class="btn-acao" style="width: 100%; margin-top: 10px;">Entrar no Sistema</button>
         </form>
       </div>
@@ -112,7 +113,7 @@
         </div>
 
         <!-- ABA 2: TÉCNICOS -->
-        <div id="aba-tecnicos" class="aba">
+        <div id="aba-tecnicos" class="aba" style="display: none;">
           <div class="secao-container">
             <div class="pilula-secao">2. Gestão de Técnicos</div>
             <form id="form-tecnico" class="linha-campo">
@@ -149,7 +150,7 @@
         </div>
 
         <!-- ABA 3: EQUIPAMENTOS -->
-        <div id="aba-equipamentos" class="aba">
+        <div id="aba-equipamentos" class="aba" style="display: none;">
           <div class="secao-container">
             <div class="pilula-secao">3. Cadastrar Equipamento</div>
             <form id="form-equipamento" class="linha-campo">
@@ -186,10 +187,10 @@
         </div>
 
         <!-- ABA 4: ORDENS DE SERVIÇO -->
-        <div id="aba-ordens" class="aba">
+        <div id="aba-ordens" class="aba" style="display: none;">
           <div class="secao-container">
             <div class="pilula-secao">4. Abertura de Ordem de Serviço</div>
-            <form id="form-os">
+            <form id="form-os" style="display: flex; flex-direction: column; gap: 15px;">
               <div class="linha-campo">
                 <div class="campo flex-1">
                   <label for="os-cliente-id">ID do Cliente:</label>
@@ -207,3 +208,296 @@
 
               <div class="campo">
                 <label for="os-descricao">Descrição Detalhada do Problema:</label>
+                <textarea id="os-descricao" rows="3" placeholder="Descreva o defeito ou serviço solicitado..." style="width: 100%; box-sizing: border-box; padding: 12px; border: 1px solid #d1d5db; border-radius: 10px; font-family: inherit;" required></textarea>
+              </div>
+
+              <button type="submit" class="btn-acao" style="align-self: flex-start;">+ Abrir Ordem de Serviço</button>
+            </form>
+
+            <div class="tabela-container" style="margin-top: 20px;">
+              <table class="tabela-clientes">
+                <thead>
+                  <tr>
+                    <th>OS #</th>
+                    <th>Cliente</th>
+                    <th>Técnico</th>
+                    <th>Equipamento</th>
+                    <th>Descrição</th>
+                    <th>Status</th>
+                    <th>Ação</th>
+                  </tr>
+                </thead>
+                <tbody id="lista-ordens"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+<script>
+    // =========================================================
+    // 1. MÁSCARA AUTOMÁTICA DO CPF (000.000.000-00)
+    // =========================================================
+    const inputCpf = document.getElementById('login-cpf');
+
+    inputCpf.addEventListener('input', function (e) {
+      let valor = e.target.value.replace(/\D/g, '');
+      if (valor.length > 11) valor = valor.slice(0, 11);
+
+      valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+      valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+      valor = valor.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+
+      e.target.value = valor;
+    });
+
+    // =========================================================
+    // 2. LOGIN DIRETO NA ROTA /api/login DO BANCO.DB
+    // =========================================================
+    const formLogin = document.getElementById('form-login');
+    const erroLogin = document.getElementById('erro-login');
+
+    formLogin.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const nome = document.getElementById('login-nome').value.trim();
+      const cpf = document.getElementById('login-cpf').value.trim();
+      const senha = document.getElementById('login-senha').value.trim();
+
+      try {
+        const res = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nome, cpf, senha })
+        });
+
+        const dados = await res.json();
+
+        if (!res.ok) {
+          erroLogin.textContent = dados.erro || 'Nome, CPF ou senha incorretos!';
+          erroLogin.style.display = 'block';
+          return;
+        }
+
+        // Libera o painel
+        erroLogin.style.display = 'none';
+        document.getElementById('tela-login').style.display = 'none';
+        document.getElementById('painel-restrito').style.display = 'block';
+        document.getElementById('usuario-logado-texto').textContent = `Operador: ${dados.usuario.nome} (${dados.usuario.cpf})`;
+
+        carregarTudo();
+      } catch (err) {
+        erroLogin.textContent = 'Erro ao conectar com o servidor.';
+        erroLogin.style.display = 'block';
+      }
+    });
+
+    function sairSistema() {
+      document.getElementById('painel-restrito').style.display = 'none';
+      document.getElementById('tela-login').style.display = 'block';
+      formLogin.reset();
+      erroLogin.style.display = 'none';
+    }
+
+    // =========================================================
+    // 3. NAVEGAÇÃO ENTRE ABAS
+    // =========================================================
+    function mostrarAba(nomeAba, botaoClicado) {
+      document.querySelectorAll('.aba').forEach(aba => {
+        aba.style.display = 'none';
+        aba.classList.remove('ativa');
+      });
+
+      document.querySelectorAll('.btn-aba').forEach(btn => {
+        btn.classList.remove('ativa');
+      });
+
+      const abaAlvo = document.getElementById(`aba-${nomeAba}`);
+      if (abaAlvo) {
+        abaAlvo.style.display = 'block';
+        abaAlvo.classList.add('ativa');
+      }
+
+      if (botaoClicado) {
+        botaoClicado.classList.add('ativa');
+      }
+    }
+
+    // =========================================================
+    // 4. INTEGRAÇÃO COM AS ROTAS /api/... DO SERVER.JS
+    // =========================================================
+    async function carregarTudo() {
+      carregarClientes();
+      carregarTecnicos();
+      carregarEquipamentos();
+      carregarOrdens();
+    }
+
+    // --- CLIENTES ---
+    async function carregarClientes() {
+      const res = await fetch('/api/clientes');
+      const dados = await res.json();
+      document.getElementById('lista-clientes').innerHTML = dados.map(c => `
+        <tr>
+          <td>${c.id}</td>
+          <td>${c.nome}</td>
+          <td>${c.email}</td>
+          <td>${c.telefone}</td>
+          <td><button type="button" class="btn-deletar" onclick="deletarItem('/api/clientes/${c.id}', carregarClientes)">Excluir</button></td>
+        </tr>
+      `).join('');
+    }
+
+    document.getElementById('form-cliente').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const res = await fetch('/api/clientes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nome: document.getElementById('cli-nome').value.trim(),
+          email: document.getElementById('cli-email').value.trim(),
+          telefone: document.getElementById('cli-telefone').value.trim()
+        })
+      });
+      if (res.ok) {
+        this.reset();
+        carregarClientes();
+      } else {
+        const erro = await res.json();
+        alert(erro.erro || 'Erro ao cadastrar cliente');
+      }
+    });
+
+    // --- TÉCNICOS ---
+    async function carregarTecnicos() {
+      const res = await fetch('/api/tecnicos');
+      const dados = await res.json();
+      document.getElementById('lista-tecnicos').innerHTML = dados.map(t => `
+        <tr>
+          <td>${t.id}</td>
+          <td>${t.nome}</td>
+          <td>${t.especialidade}</td>
+          <td>${t.email}</td>
+          <td><button type="button" class="btn-deletar" onclick="deletarItem('/api/tecnicos/${t.id}', carregarTecnicos)">Excluir</button></td>
+        </tr>
+      `).join('');
+    }
+
+    document.getElementById('form-tecnico').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const res = await fetch('/api/tecnicos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nome: document.getElementById('tec-nome').value.trim(),
+          especialidade: document.getElementById('tec-especialidade').value.trim(),
+          email: document.getElementById('tec-email').value.trim()
+        })
+      });
+      if (res.ok) {
+        this.reset();
+        carregarTecnicos();
+      } else {
+        const erro = await res.json();
+        alert(erro.erro || 'Erro ao cadastrar técnico');
+      }
+    });
+
+    // --- EQUIPAMENTOS ---
+    async function carregarEquipamentos() {
+      const res = await fetch('/api/equipamentos');
+      const dados = await res.json();
+      document.getElementById('lista-equipamentos').innerHTML = dados.map(eq => `
+        <tr>
+          <td>${eq.id}</td>
+          <td>${eq.nome}</td>
+          <td>${eq.modelo}</td>
+          <td>${eq.cliente_nome ? `${eq.cliente_nome} (ID: ${eq.cliente_id})` : eq.cliente_id}</td>
+          <td><button type="button" class="btn-deletar" onclick="deletarItem('/api/equipamentos/${eq.id}', carregarEquipamentos)">Excluir</button></td>
+        </tr>
+      `).join('');
+    }
+
+    document.getElementById('form-equipamento').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const res = await fetch('/api/equipamentos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nome: document.getElementById('eq-nome').value.trim(),
+          modelo: document.getElementById('eq-modelo').value.trim(),
+          cliente_id: document.getElementById('eq-cliente-id').value
+        })
+      });
+      if (res.ok) {
+        this.reset();
+        carregarEquipamentos();
+      } else {
+        const erro = await res.json();
+        alert(erro.erro || 'Erro ao cadastrar equipamento (verifique se o ID do cliente existe)');
+      }
+    });
+
+    // --- ORDENS DE SERVIÇO ---
+    async function carregarOrdens() {
+      const res = await fetch('/api/ordens_servico');
+      const dados = await res.json();
+      document.getElementById('lista-ordens').innerHTML = dados.map(os => `
+        <tr>
+          <td>${os.id}</td>
+          <td>${os.cliente_nome || os.cliente_id}</td>
+          <td>${os.tecnico_nome || os.tecnico_id || '-'}</td>
+          <td>${os.equipamento_nome || os.equipamento_id || '-'}</td>
+          <td>${os.descricao}</td>
+          <td>
+            <select onchange="atualizarStatusOS(${os.id}, this.value)" style="padding: 4px 8px; border-radius: 6px; border: 1px solid #cbd5e1;">
+              <option value="Pendente" ${os.status === 'Pendente' ? 'selected' : ''}>Pendente</option>
+              <option value="Em Andamento" ${os.status === 'Em Andamento' ? 'selected' : ''}>Em Andamento</option>
+              <option value="Concluída" ${os.status === 'Concluída' ? 'selected' : ''}>Concluída</option>
+            </select>
+          </td>
+          <td><button type="button" class="btn-deletar" onclick="deletarItem('/api/ordens_servico/${os.id}', carregarOrdens)">Excluir</button></td>
+        </tr>
+      `).join('');
+    }
+
+    document.getElementById('form-os').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const res = await fetch('/api/ordens_servico', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          cliente_id: document.getElementById('os-cliente-id').value,
+          tecnico_id: document.getElementById('os-tecnico-id').value || null,
+          equipamento_id: document.getElementById('os-equipamento-id').value || null,
+          descricao: document.getElementById('os-descricao').value.trim()
+        })
+      });
+      if (res.ok) {
+        this.reset();
+        carregarOrdens();
+      } else {
+        const erro = await res.json();
+        alert(erro.erro || 'Erro ao abrir Ordem de Serviço');
+      }
+    });
+
+    async function atualizarStatusOS(id, novoStatus) {
+      await fetch(`/api/ordens_servico/${id}/status`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: novoStatus })
+      });
+    }
+
+    // --- EXCLUIR ITEM ---
+    async function deletarItem(url, callbackAtualizar) {
+      await fetch(url, { method: 'DELETE' });
+      callbackAtualizar();
+    }
+  </script>
+  </body>
+</html>
