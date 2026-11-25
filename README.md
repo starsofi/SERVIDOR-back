@@ -1,46 +1,57 @@
+Markdown
 # Sistema de Gestão de Ordens de Serviço — A.S.A.I. Manutenções
 
-Aplicação web desenvolvida para o gerenciamento interno de ordens de serviço, técnicos, clientes e equipamentos da A.S.A.I. Manutenções, contando também com área pública para registro de solicitações pelos clientes.
+Aplicação web desenvolvida para o gerenciamento interno de ordens de serviço, técnicos, clientes e equipamentos da **A.S.A.I. Manutenções**, contando também com área pública para criação de conta e registro de solicitações pelos clientes.
 
 ## Tecnologias Utilizadas
-
-* **Front-end:** HTML5, CSS3, JavaScript
-* **Back-end:** Node.js, Express
-* **Banco de Dados:** SQLite (`node:sqlite`)
-
----
+- **Front-end:** HTML, CSS, JavaScript
+- **Back-end:** Node.js, Express
+- **Banco de Dados:** SQLite (`node:sqlite`)
 
 ## Estrutura de Pastas
 
 ```text
 ├── SERV/
-│   └── banco.db              # Banco de dados SQLite
+│   └── banco.db              # Banco de dados SQLite (criado automaticamente)
 └── SERVID/
     ├── backend/
     │   └── server.js         # Servidor Express e rotas da API
-    └── public/
-        ├── CSS/              # Folhas de estilo
-        ├── fotos/            # Imagens e ícones
-        ├── index.html        # Página inicial / Painel operacional
-        ├── login.html        # Login do cliente
-        ├── criar.html        # Criação de conta do cliente
-        └── cadastro.html     # Registro de solicitação de serviço
+    ├── public/
+    │   ├── CSS/              # Folhas de estilo
+    │   ├── fotos/            # Imagens e ícones
+    │   ├── artigos.html      # Página de artigos
+    │   ├── cadastro.html     # Registro de solicitação de serviço
+    │   ├── consulta.html     # Consulta de serviços
+    │   ├── criar.html        # Criação de conta do cliente
+    │   ├── criar.js          # Script da página de criação de conta
+    │   ├── galeria.html      # Galeria de fotos
+    │   ├── index.html        # Página inicial pública
+    │   ├── indexso.html      # Painel operacional restrito (Ordens de Serviço)
+    │   ├── login.html        # Login do cliente
+    │   ├── perfil.html       # Perfil do cliente
+    │   ├── recsenha.html     # Recuperação de senha
+    │   ├── sobre.html        # Sobre a empresa
+    │   └── status.html       # Acompanhamento de status
+    ├── package.json          # Dependências do projeto
+    └── package-lock.json
 Como Executar o Projeto
-Certifique-se de ter o Node.js (versão 22 ou superior) instalado.
+Certifique-se de ter o Node.js instalado.
 
-Abra o terminal na pasta SERVID/backend e instale as dependências:
+Abra o terminal na pasta SERVID e instale as dependências:
 
 Bash
-npm install express
+npm.cmd install
 Inicie o servidor:
 
 Bash
-node server.js
+node backend/server.js
 Acesse no navegador:
 
-Sistema: http://localhost:3000
+Site Público: http://localhost:3000
 
-Portal do Cliente: http://localhost:3000/login.html
+Portal do Cliente (Login): http://localhost:3000/login.html
+
+Painel Operacional (Acesso Restrito): http://localhost:3000/indexso.html
 
 Estrutura do Banco de Dados (banco.db)
 usuarios: Usuários administrativos com acesso restrito ao painel operacional (id, nome, cpf, senha).
@@ -154,14 +165,6 @@ GET /api/ordens_servico — Lista todas as ordens de serviço com cliente, técn
 
 POST /api/ordens_servico — Abre uma nova OS. Corpo: {"cliente_id", "tecnico_id", "equipamento_id", "descricao", "status"}. Resposta: 200 OK {"ok": true} ou 400 Bad Request.
 
-PUT /api/ordens_servico/:id/status — Atualiza o status da OS (Pendente, Em andamento, Concluído). Corpo: {"status": "Concluído"}. Resposta: 200 OK {"ok": true}.
+PUT /api/ordens_servico/:id/status — Atualiza o status da OS (Pendente, Em Andamento, Concluída). Corpo: {"status": "Concluída"}. Resposta: 200 OK {"ok": true}.
 
 DELETE /api/ordens_servico/:id — Exclui uma ordem de serviço pelo ID (200 OK).
-
-
-Depois de criar o arquivo `README.md` e salvar, basta rodar no terminal da pasta do repositório para enviar tudo para o GitHub:
-
-```bash
-git add .
-git commit -m "Entrega Sprint 2 - API, banco SQLite e documentacao"
-git push
